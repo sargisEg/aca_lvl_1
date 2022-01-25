@@ -38,5 +38,4 @@ public class CovidTest {
         user.print();
         System.out.println("Result: " + (positive ? "Positive" : "Negative"));
     }
-
 }
