@@ -2,6 +2,7 @@ package com.aca.homework.week3.stackofstrings;
 
 public class Stack {
     private String[] stringStack;
+    private int index;
 
     public static void main(String[] args) {
         Stack stack = new Stack();
@@ -12,46 +13,41 @@ public class Stack {
         stack.push("push");
         stack.push("push");
         stack.printStack();
-        stack.pop();
-        stack.pop();
-        stack.pop();
-        stack.pop();
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
+        System.out.println(stack.pop());
         stack.printStack();
 
     }
 
     public Stack(){
         this.stringStack = new String[10];
+        index = 0;
     }
 
     public void push(String pushString){
-        if(stringStack[9] != null) throw new ArrayIndexOutOfBoundsException("Stack is full");
-        for (int i = 0; i < stringStack.length; i++) {
-            if(stringStack[i] == null){
-                stringStack[i] = pushString;
-                System.out.println("<" + stringStack[i] + "> is pushed");
-                break;
-            }
-        }
+        if(index == 10) throw new ArrayIndexOutOfBoundsException("Stack is full");
+        stringStack[index] = pushString;
+        System.out.println("<" + stringStack[index] + "> is pushed");
+        index++;
     }
 
-    public void pop(){
-        if(stringStack[9] != null) throw new ArrayIndexOutOfBoundsException("Stack is empty");
-        for (int i = 0; i < stringStack.length; i++) {
-            if(stringStack[i] == null){
-                System.out.println("<" + stringStack[i-1] + "> is popped");
-                stringStack[i-1] = null;
-                break;
-            }
-        }
+    public String pop(){
+        String poppedString;
+        if(index == 0) throw new ArrayIndexOutOfBoundsException("Stack is empty");
+        index--;
+        poppedString = stringStack[index];
+        stringStack[index] = null;
+        return poppedString;
+
     }
 
     public void printStack(){
-        if (stringStack[0] != null) {
+        if (index != 0) {
             System.out.print("< ");
-            for (int i = 0; i < stringStack.length; i++) {
-                if (stringStack[i] != null)
-                    System.out.print(stringStack[i] + " ");
+            for (int i = 0; i < index; i++) {
+                System.out.print(stringStack[i] + " ");
             }
             System.out.println(" >");
         }else System.out.println("Stack is empty");
