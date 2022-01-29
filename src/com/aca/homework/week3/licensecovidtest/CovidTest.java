@@ -15,21 +15,19 @@ public class CovidTest {
 
     public void test(){
         System.out.println("Testing for COVID.....");
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        long time = System.currentTimeMillis();
+        while (System.currentTimeMillis() < time+3000);
+
 
         this.setResult((int)(Math.random()*2) == 1 ? "positive" : "negative");
         System.out.println(getResult());
     }
 
     public void setResult(String result) {
-        if (result == "positive" || result == "negative"){
+        if (result.equals("positive") || result.equals("negative")){
             this.result = result;
         }else
-            throw new RuntimeException("Result can be positive or negative");
+            throw new IllegalArgumentException("Result can be positive or negative");
     }
 
     public String getResult() {
