@@ -11,16 +11,6 @@ public class DrivingLicense {
 
     public void setCategories(char[] categories) {
         this.categories = categories;
-        for (int i = 0; i < categories.length; i++) {
-            if (categories[i] == 'A'
-                    || categories[i] == 'B'
-                    || categories[i] == 'C'
-                    || categories[i] == 'D'
-                    || categories[i] == 'E'){
-                this.categories[i] = categories[i];
-            }else
-                throw new IllegalArgumentException(categories[i] + " is invalid type of license");
-        }
     }
 
     public void showLicense(){
