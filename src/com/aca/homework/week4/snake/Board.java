@@ -1,80 +1,87 @@
 package com.aca.homework.week4.snake;
 
-
 import java.util.Random;
 import java.util.Scanner;
 
 public class Board {
+    private BoardPixel[][] board;
+
+    public Board() {
+        this.board = new BoardPixel[8][8];
+    }
 
     public static void main(String[] args) {
-        Snake[][] board = new Snake[8][8];
+        Board board = new Board();
 
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                board[i][j] = new Snake(i, j);
+        board.makeBoardAndPrint();
+        board.startSnakeGame();
+    }
+
+    public void move(int xHead, int yHead) {
+
+        char apple = '=';
+
+        if (moveCheck(xHead, yHead))
+            System.out.println("cannot move");
+        else if (board[xHead][yHead].getSymbol() == apple) {
+            board[xHead][yHead].putSnakeHead();
+            putNewAppleInBoard();
+        } else {
+            SnakeBodyPart.getPixelOfSnakeBodyPartByIndex(1, board).putEmpty(); // snake tail setting
+
+            for (int i = 1; i <= SnakeBodyPart.getSnakeAllSize(); i++) { //snake body switching
+                if (i != 1)
+                    SnakeBodyPart.getPixelOfSnakeBodyPartByIndex(i, board).getSnakeBodyPart().setIndexOfBodyPart(i - 1);
             }
-        }
 
-        board[0][0].setSnakeHead();
-        board[2][1].setApple();
-
-        print(board);
-
-        char move;
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("please choose the direction");
-        move = scanner.next().charAt(0);
-
-        while (true) {
-            if (move == 'd') {
-                int xHead = Snake.getBySize(Snake.getSnakeSize(), board).getX();
-                int yHead = Snake.getBySize(Snake.getSnakeSize(), board).getY() + 1;  // snake head cooridinates after move
-                Board.move(board,xHead,yHead); // moving snake
-                print(board);
-            } else if (move == 'a') {
-                int xHead = Snake.getBySize(Snake.getSnakeSize(), board).getX();
-                int yHead = Snake.getBySize(Snake.getSnakeSize(), board).getY() - 1;
-                Board.move(board,xHead,yHead);
-                print(board);
-            } else if (move == 'w') {
-                int xHead = Snake.getBySize(Snake.getSnakeSize(), board).getX() - 1;
-                int yHead = Snake.getBySize(Snake.getSnakeSize(), board).getY();
-                Board.move(board,xHead,yHead);
-                print(board);
-            } else if (move == 's') {
-                int xHead = Snake.getBySize(Snake.getSnakeSize(), board).getX() + 1;
-                int yHead = Snake.getBySize(Snake.getSnakeSize(), board).getY();
-                Board.move(board,xHead,yHead);
-                print(board);
-            }
-            System.out.println("please choose the direction");
-            move = scanner.next().charAt(0);
+            board[xHead][yHead].makeBody();             // snake head setting
+            board[xHead][yHead].getSnakeBodyPart().setIndexOfBodyPart(SnakeBodyPart.getSnakeAllSize());
         }
     }
 
-    public static void move(Snake[][] board, int xHead, int yHead){
-
-        if(xHead > 7 || xHead < 0 || yHead > 7 || yHead < 0)
-            System.out.println("cannot move");
-        else if (board[xHead][yHead].getSymbol() == '=') {  // apple eating
-            board[xHead][yHead].setSnakeHead();
-            newApple(board);
-        }else if(board[xHead][yHead].getSymbol() == '*') {
-            System.out.println("cannot move");
-        }else {
-
-            Snake.getBySize(1, board).setEmpty(); // snake tail setting
-
-            for (int i = 1; i <= Snake.getSnakeSize(); i++) { //snake body switching
-                Snake.getBySize(i, board).setSize(i - 1);
-            }
-
-            board[xHead][yHead].setBody();             // snake head setting
-            board[xHead][yHead].setSize(Snake.getSnakeSize());
-        }
+    public boolean moveCheck(int xHead, int yHead) {
+        return ((xHead > 7 || xHead < 0 || yHead > 7 || yHead < 0)
+                || (board[xHead][yHead].getSymbol() == '*'));
     }
 
-    public static void print(Snake[][] board) {
+
+    public int getXOfSnakeHead() {
+        return SnakeBodyPart.getPixelOfSnakeBodyPartByIndex(SnakeBodyPart.getSnakeAllSize(), board).getX();
+    }
+
+    public int getYOfSnakeHead() {
+        return SnakeBodyPart.getPixelOfSnakeBodyPartByIndex(SnakeBodyPart.getSnakeAllSize(), board).getY();
+    }
+
+    public void moveRightAndPrint() {
+        int xHead = getXOfSnakeHead();
+        int yHead = getYOfSnakeHead() + 1;
+        move(xHead, yHead);
+        printBoard();
+    }
+
+    public void moveLeftAndPrint() {
+        int xHead = getXOfSnakeHead();
+        int yHead = getYOfSnakeHead() - 1;
+        move(xHead, yHead);
+        printBoard();
+    }
+
+    public void moveDownAndPrint() {
+        int xHead = getXOfSnakeHead() + 1;
+        int yHead = getYOfSnakeHead();
+        move(xHead, yHead);
+        printBoard();
+    }
+
+    public void moveUpAndPrint() {
+        int xHead = getXOfSnakeHead() - 1;
+        int yHead = getYOfSnakeHead();
+        move(xHead, yHead);
+        printBoard();
+    }
+
+    public void printBoard() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 System.out.print(board[i][j].getSymbol());
@@ -83,15 +90,59 @@ public class Board {
         }
     }
 
-    public static void newApple(Snake[][] board){
+    public void putNewAppleInBoard() {
         int appleX;
         int appleY;
-        do{
+        do {
             appleX = (new Random()).nextInt(8);
             appleY = (new Random()).nextInt(8);
 
-        }while (board[appleX][appleY].getSymbol() == '*');
-        board[appleX][appleY].setApple();
+        } while (board[appleX][appleY].getSymbol() == '*');
+        board[appleX][appleY].putApple();
+    }
+
+    public BoardPixel[][] getBoard() {
+        return board;
+    }
+
+    public void startSnakeGame() {
+
+        char right = 'd';
+        char left = 'a';
+        char up = 'w';
+        char down = 's';
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("please choose the direction");
+        char move = scanner.next().charAt(0);
+
+        while (true) {
+            if (move == left) {
+                moveLeftAndPrint();
+            } else if (move == right) {
+                moveRightAndPrint();
+            } else if (move == up) {
+                moveUpAndPrint();
+            } else if (move == down) {
+                moveDownAndPrint();
+            }
+            System.out.println("please choose the direction");
+            move = scanner.next().charAt(0);
+        }
+    }
+
+    public void makeBoardAndPrint() {
+
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                board[i][j] = new BoardPixel(i, j);
+            }
+        }
+
+        board[0][0].putSnakeHead();
+        board[2][1].putApple();
+
+        printBoard();
     }
 }
 
