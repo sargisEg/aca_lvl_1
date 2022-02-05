@@ -1,8 +1,8 @@
 package com.aca.homework.week4.time;
 
 public class Time {
-    private long timeInSec;
 
+    private long timeInSec;
 
     public static void main(String[] args) {
         Time time = new Time(0);
@@ -17,7 +17,7 @@ public class Time {
     }
 
     public Time(long time){
-    timeInSec = time;
+        timeInSec = time;
     }
 
     public long getHours(){
