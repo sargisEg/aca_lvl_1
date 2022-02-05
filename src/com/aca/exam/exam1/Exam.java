@@ -40,13 +40,11 @@ public class Exam {
     }
 
     public double getMid(){ //4. 5 թվերի միջինը
-        double mid;
         double sum = 0;
         for (int i = 0; i < numbers.length; i++) {
         sum += numbers[i];
         }
-        mid = sum/numbers.length;
-        return mid;
+        return sum/numbers.length;
     }
 
     public void printNNum(int n){ //5. կպահանջի մուտքագրել N թիվ և կտպի N-րդ թիվը
