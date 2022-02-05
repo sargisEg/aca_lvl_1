@@ -1,10 +1,10 @@
 package com.aca.homework.week4.image;
 
 public class Image {
+
     private int imageX;
     private int imageY;
     private char[][] image;
-
 
     public static void main(String[] args) {
         Image image = new Image(5,10);
@@ -22,11 +22,14 @@ public class Image {
 
     }
 
-    public Image(int X, int Y){
-        imageX = X;
-        imageY = Y;
-        image = new char[Y][X];
+    public Image(int x, int y){
+        imageX = x;
+        imageY = y;
+        image = new char[y][x];
+        createImage();
+    }
 
+    private void createImage(){
         for (int i = 0; i < imageY; i++) {
             for (int j = 0; j < imageX; j++) {
                 image[i][j] = '-';
