@@ -10,7 +10,7 @@ public class Exam {
         }
     }
 
-    public int getmax(){ //1. 5 թվերից առավելագույնը
+    public int getMax(){ //1. 5 թվերից առավելագույնը
         int max = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
             if (max < numbers[i])
@@ -20,7 +20,7 @@ public class Exam {
         return max;
     }
 
-    public int getmin(){ //2. 5 թվերից նվազագույնը
+    public int getMin(){ //2. 5 թվերից նվազագույնը
         int min = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
             if (min > numbers[i])
@@ -30,7 +30,7 @@ public class Exam {
         return min;
     }
 
-    public int[] numbersx2(){ // 3. 5 թվերից յուրաքանչյուրի արժեքի կրկնապատկում
+    public int[] numbersX2(){ // 3. 5 թվերից յուրաքանչյուրի արժեքի կրկնապատկում
 //                          (այս քայլից հետո եթե օգտագործողը ընտրի օրինակ 1 մշակումը,
 //                          ապա պետք է տեսնի նախկին առավելագույն արժեքի կրկնապատիկը)
         for (int i = 0; i < numbers.length; i++) {
@@ -39,7 +39,7 @@ public class Exam {
         return numbers;
     }
 
-    public double getmid(){ //4. 5 թվերի միջինը
+    public double getMid(){ //4. 5 թվերի միջինը
         double mid;
         double sum = 0;
         for (int i = 0; i < numbers.length; i++) {
@@ -49,24 +49,24 @@ public class Exam {
         return mid;
     }
 
-    public int getNNum(int n){ //5. կպահանջի մուտքագրել N թիվ և կտպի N-րդ թիվը
+    public void printNNum(int n){ //5. կպահանջի մուտքագրել N թիվ և կտպի N-րդ թիվը
 //                                  (եթե N֊ը ունի անթույլատրելի արժեք, ապա կանտեսի N-րդ թվի տպելը)
-        return numbers[n-1];
+        System.out.println(numbers[n-1]);
     }
 
-    public int getdif(){ //6. 5 թվերից առավելագույնի և նվազագույնի տարբերությունը
-        return getmax() - getmin();
+    public int getDif(){ //6. 5 թվերից առավելագույնի և նվազագույնի տարբերությունը
+        return getMax() - getMin();
     }
 
     public int zeros(){ //7. բոլոր 5 թվերում 0֊ների քանակը
         int zeros = 0;
         for (int i = 0; i < numbers.length; i++) {
-            zeros += getzeros(numbers[i]);
+            zeros += getZeros(numbers[i]);
         }
         return zeros;
     }
 
-    private int getzeros(int n){
+    private int getZeros(int n){
         int zeros = 0;
         if (n == 0)
             return 1;

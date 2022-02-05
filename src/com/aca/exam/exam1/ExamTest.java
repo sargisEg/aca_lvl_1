@@ -10,7 +10,7 @@ public class ExamTest {
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Pleas insert 5 numbers: ");
+        System.out.println("Please insert 5 numbers: ");
 
         for (int i = 0; i < numbers.length ; i++) {
             numbers[i] = scanner.nextInt();
@@ -18,34 +18,34 @@ public class ExamTest {
 
         Exam functions = new Exam(numbers);
 
-        System.out.println("Pleas insert number (from 1 to 8): ");
+        System.out.println("Please insert number (from 1 to 8): ");
         int num = 0;
         num = scanner.nextInt();
         while (num != 8){
 
             if(num == 1)
-                System.out.println(functions.getmax());
+                System.out.println(functions.getMax());
             if(num == 2)
-                System.out.println(functions.getmin());
+                System.out.println(functions.getMin());
             if(num == 4)
-                System.out.println(functions.getmid());
+                System.out.println(functions.getMid());
             if(num == 6)
-                System.out.println(functions.getdif());
+                System.out.println(functions.getDif());
             if(num == 7)
                 System.out.println(functions.zeros());
             if(num == 5){
                 int N;
-                System.out.print("Pleas enter N: ");
+                System.out.print("Please enter N: ");
                 N = scanner.nextInt();
                 if(N > 0 && N <= numbers.length)
-                    System.out.println(functions.getNNum(N));
+                    functions.printNNum(N);
             }
             if(num == 3){
-                functions.numbersx2();
+                functions.numbersX2();
                 functions.print();
             }
 
-            System.out.println("Pleas insert number (from 1 to 8): ");
+            System.out.println("Please insert number (from 1 to 8): ");
             num = scanner.nextInt();
         }
 
