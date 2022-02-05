@@ -19,11 +19,9 @@ public class Board {
 
     public void move(int xHead, int yHead) {
 
-        char apple = '=';
-
         if (moveCheck(xHead, yHead))
             System.out.println("cannot move");
-        else if (board[xHead][yHead].getSymbol() == apple) {
+        else if (appleCheck(xHead,yHead)) {
             board[xHead][yHead].putSnakeHead();
             putNewAppleInBoard();
         } else {
@@ -42,6 +40,10 @@ public class Board {
     public boolean moveCheck(int xHead, int yHead) {
         return ((xHead > 7 || xHead < 0 || yHead > 7 || yHead < 0)
                 || (board[xHead][yHead].getSymbol() == '*'));
+    }
+    public boolean appleCheck(int xHead, int yHead) {
+        char apple = '=';
+        return board[xHead][yHead].getSymbol() == apple;
     }
 
 
@@ -91,13 +93,15 @@ public class Board {
     }
 
     public void putNewAppleInBoard() {
+
+        Random randomNum = new Random();
         int appleX;
         int appleY;
         do {
-            appleX = (new Random()).nextInt(8);
-            appleY = (new Random()).nextInt(8);
+            appleX = randomNum.nextInt(8);
+            appleY = randomNum.nextInt(8);
 
-        } while (board[appleX][appleY].getSymbol() == '*');
+        } while (appleCheck(appleX,appleY));
         board[appleX][appleY].putApple();
     }
 
