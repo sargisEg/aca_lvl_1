@@ -14,6 +14,5 @@ public class DeveloperTest {
         Developer seniorDev = new SeniorDeveloper();
         seniorDev.setName("Emily");
         seniorDev.print();
-
     }
 }

@@ -4,15 +4,13 @@ public class JuniorDeveloper extends Developer {
 
     @Override
     public int getLearningBudget() {
-        return super.getLearningBudget()*2;
+        return super.getLearningBudget() * 2;
     }
 
     @Override
     public int getSalary() {
         return 300_000;
     }
-
-
 }
 
 /*

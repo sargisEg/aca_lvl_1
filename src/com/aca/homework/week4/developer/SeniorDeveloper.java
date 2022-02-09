@@ -4,7 +4,7 @@ public class SeniorDeveloper extends Developer {
 
     @Override
     public int getLearningBudget() {
-        return super.getLearningBudget()*8;
+        return super.getLearningBudget() * 8;
     }
 
     @Override
