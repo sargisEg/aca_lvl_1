@@ -15,7 +15,8 @@ public class UIButton extends UIView {
 
     @Override
     public void click() {
-        System.out.print("clicked on a button having a color " + buttonColor);
-        super.click();
+        System.out.print("clicked on a button having a color " + buttonColor +
+                ", width: " + getWidth() +
+                ", height: " + getHeight());
     }
 }

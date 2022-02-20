@@ -9,7 +9,13 @@ public abstract class UIView {
         this.height = height;
     }
 
-    public void click() {
-        System.out.println(" width: " + width + ", height: " + height);
+    public double getWidth() {
+        return width;
     }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public abstract void click();
 }
