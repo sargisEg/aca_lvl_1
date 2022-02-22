@@ -1,7 +1,7 @@
 package com.aca.homework.week7.clone;
 
 public class Light implements Cloneable {
-    State state;
+    private State state;
 
     private Light(State state) {
         this.state = state;
@@ -17,6 +17,6 @@ public class Light implements Cloneable {
 
     @Override
     protected Light clone() throws CloneNotSupportedException {
-        return new Light(this.state);
+        return (Light) super.clone();
     }
 }
