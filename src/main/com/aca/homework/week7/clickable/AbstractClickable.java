@@ -3,15 +3,15 @@ package com.aca.homework.week7.clickable;
 public abstract class AbstractClickable implements Clickable {
 
     private Action action;
+    private String name;
 
-    public AbstractClickable() {
-        this.action = new Action() {
-            @Override
-            public void doAction(Clickable clickable) {
-                System.out.println("The click method is invoked on the " + clickable.getClass().getSimpleName()
-                        + " object having a name " + clickable.name());
-            }
-        };
+    public AbstractClickable(Action action) {
+        this.action = action;
+    }
+
+    @Override
+    public String name() {
+        return this.name;
     }
 
     @Override
