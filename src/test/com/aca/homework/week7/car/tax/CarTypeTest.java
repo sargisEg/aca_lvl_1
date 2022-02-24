@@ -5,7 +5,7 @@ class CarTypeTest {
         CarType electricCar = CarType.ELECTRIC;
         CarType hybridCar = CarType.HYBRID;
 
-        System.out.println(electricCar.annualTex(2015));
-        System.out.println(hybridCar.annualTex(2010));
+        System.out.println(electricCar.annualTex(7));
+        System.out.println(hybridCar.annualTex(12));
     }
 }
