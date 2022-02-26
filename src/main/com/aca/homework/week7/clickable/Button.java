@@ -4,23 +4,13 @@ public class Button extends AbstractClickable {
 
     private String name;
 
-    private Button(String name) {
-        super(new Action() {
-            @Override
-            public void doAction(Clickable clickable) {
-                System.out.println("The click method is invoked on the " + clickable.getClass().getSimpleName()
-                        + " object having a name " + clickable.name());
-            }
-        });
+    private Button(String name, Action action) {
+        super(action);
         this.name = name;
     }
 
-    public static Button ofName(String name) {
-        return new Button(name);
+    public static Button ofName(String name, Action action) {
+        return new Button(name, action);
     }
 
-    @Override
-    public String name() {
-        return name;
-    }
 }
