@@ -4,13 +4,9 @@ public class PayResult {
     private int payAmount;
     private long processingTime;
 
-    private PayResult(int payAmount, long processingTime) {
+    public PayResult(int payAmount, long processingTime) {
         this.payAmount = payAmount;
         this.processingTime = processingTime;
-    }
-
-    public static PayResult ofResult(int payAmount, long processingTime) {
-        return new PayResult(payAmount, processingTime);
     }
 
     public int getPayAmount() {

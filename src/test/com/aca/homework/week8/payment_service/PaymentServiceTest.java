@@ -22,14 +22,12 @@ class PaymentServiceTest {
 
     @Test
     public void testPaymentAmount() {
-        int testArgument = 100;
-        Assertions.assertEquals(100, testSubject.pay(testArgument).getPayAmount());
+        Assertions.assertEquals(100, testSubject.pay(100).getPayAmount());
     }
 
     @Test
     public void testDuration() {
-        int testArgument = 100;
-        Assertions.assertTrue(testSubject.pay(testArgument).getProcessingTime() > 200
-                && testSubject.pay(testArgument).getProcessingTime() < 800);
+        Assertions.assertTrue(testSubject.pay(100).getProcessingTime() > 200
+                && testSubject.pay(100).getProcessingTime() < 800);
     }
 }

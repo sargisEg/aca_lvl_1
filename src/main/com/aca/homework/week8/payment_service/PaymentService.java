@@ -8,11 +8,11 @@ public class PaymentService {
     public PayResult pay(int money) {
         long startMillis = System.currentTimeMillis();
         waitSomeSec();
-        return PayResult.ofResult(money,System.currentTimeMillis() - startMillis);
+        return new PayResult(money, System.currentTimeMillis() - startMillis);
     }
 
-    private void waitSomeSec(){
+    private void waitSomeSec() {
         long start = System.currentTimeMillis();
-        while (System.currentTimeMillis() - start <= new Random().nextInt(800)+200);
+        while (System.currentTimeMillis() - start <= new Random().nextInt(800) + 200) ;
     }
 }
