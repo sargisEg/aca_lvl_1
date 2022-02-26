@@ -1,0 +1,5 @@
+Given 2 array of int primitive.
+ Both contain the same int numbers in a shuffled way but the first array has one more additional number in it.
+
+Create a method that takes 2 arrays and finds the additional number in the first array.
+
