@@ -3,11 +3,11 @@ package com.aca.homework.week7.empty_list;
 public class FixedSizeList implements List {
 
     private Object[] array = new Object[10];
-    int index = 0;
+    private int index = 0;
 
     @Override
     public int size() {
-        return 10;
+        return index;
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.aca.homework.week7.empty_list;
 
-import com.aca.homework.week7.singleton.FixedSizeList;
-
 public interface List {
 
     int size();
