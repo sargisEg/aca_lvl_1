@@ -1,0 +1,15 @@
+The main stack should contain the followin frames
+___________
+|method5()|
+|method4()|
+|method3()|
+|method2()|
+|method1()|
+|main()   |
+___________
+
+throw a checked Exception() in method5(), catch it in the method3() and re-throw a RuntimeException() in method3().
+ Catch that RuntimException() in the main() method and print "catch" in catch block,
+  also, "finished" at the end of the main method.
+
+Write a test for each method.
