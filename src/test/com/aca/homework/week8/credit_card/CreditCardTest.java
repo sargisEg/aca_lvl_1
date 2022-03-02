@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 class CreditCardTest {
 
-    CreditCard testSubject;
+    private CreditCard testSubject;
 
     @BeforeEach
     public void setUp() {
@@ -32,6 +32,6 @@ class CreditCardTest {
     @Test
     public void notEqualsTest() {
         CreditCard creditCard = new CreditCard("1234 0000 5678 0000", 15000);
-        Assertions.assertFalse(testSubject.equals(creditCard));
+        Assertions.assertNotEquals(testSubject, creditCard);
     }
 }

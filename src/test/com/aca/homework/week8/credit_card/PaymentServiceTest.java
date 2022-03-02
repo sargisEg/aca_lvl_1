@@ -25,7 +25,6 @@ class PaymentServiceTest {
                 testSubject.pay(card, 150);
             }
         });
-
         Assertions.assertEquals("Not enough money in card. Amount to be paid: 150 card balance: 100", exception.getMessage());
     }
 
@@ -42,8 +41,6 @@ class PaymentServiceTest {
                 testSubject.pay(card, 30);
             }
         });
-
         Assertions.assertEquals("Not enough money in card. Amount to be paid: 30 card balance: 10", exception.getMessage());
-
     }
 }
