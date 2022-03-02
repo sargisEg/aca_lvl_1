@@ -3,12 +3,16 @@ package com.aca.homework.week8.car_repository;
 public class Car {
     private String vin;
     private int year;
-    private int ownersCount = 1;
+    private int ownersCount;
 
     public Car(String vin, int year) {
         this.vin = vin;
         this.year = year;
-        this.ownersCount = 1;
+    }
+
+    public void update(Car car) {
+        this.year = car.year;
+        this.ownersCount = car.ownersCount;
     }
 
     public String getVin() {
