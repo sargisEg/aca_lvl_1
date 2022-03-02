@@ -5,7 +5,8 @@ public abstract class AbstractClickable implements Clickable {
     private Action action;
     private String name;
 
-    public AbstractClickable(Action action) {
+    public AbstractClickable(String name, Action action) {
+        this.name = name;
         this.action = action;
     }
 
