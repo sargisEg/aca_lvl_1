@@ -12,19 +12,11 @@ public class Main {
     }
 
     public static void method1() {
-        try {
             method2();
-        } catch (RuntimeException e) {
-            throw e;
-        }
     }
 
     public static void method2() {
-        try {
             method3();
-        } catch (RuntimeException e) {
-            throw e;
-        }
     }
 
     public static void method3() {
