@@ -38,7 +38,7 @@ class MainTest {
     }
     @Test
     public void method3ExceptionTest() {
-        Throwable exception = Assertions.assertThrows(Throwable.class,new Executable() {
+        RuntimeException exception = Assertions.assertThrows(RuntimeException.class,new Executable() {
             @Override
             public void execute() throws Throwable {
                 Main.method3();
