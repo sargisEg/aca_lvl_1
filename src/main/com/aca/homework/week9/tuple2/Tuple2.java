@@ -2,8 +2,8 @@ package com.aca.homework.week9.tuple2;
 
 public class Tuple2<T1, T2> {
 
-    T1 t1;
-    T2 t2;
+    private T1 t1;
+    private T2 t2;
 
     public Tuple2(T1 first, T2 second) {
         this.t1 = first;
