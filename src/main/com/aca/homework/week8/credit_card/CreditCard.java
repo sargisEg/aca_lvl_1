@@ -27,6 +27,9 @@ public class CreditCard {
     }
 
     public void transfer(int amount) {
+        if (amount > this.balance)
+            throw new InsufficientBalanceException("Not enough money in card. Amount to be paid: " + amount
+                    + " card balance: " + this.balance);
         this.balance -= amount;
     }
 
