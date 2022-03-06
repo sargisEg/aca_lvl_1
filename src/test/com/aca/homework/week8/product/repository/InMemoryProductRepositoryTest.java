@@ -22,7 +22,6 @@ class InMemoryProductRepositoryTest {
                 testSubject.save(null);
             }
         });
-
         Assertions.assertEquals("Product is null", exception.getMessage());
     }
 
@@ -58,7 +57,7 @@ class InMemoryProductRepositoryTest {
     public void testFindByIdWhenProductExists() {
         Product product = new Product("Test Product", 111222333444L);
         testSubject.save(product);
-        Assertions.assertEquals(product,testSubject.findById(111222333444L));
+        Assertions.assertEquals(product, testSubject.findById(111222333444L));
     }
 
     @Test
@@ -69,7 +68,6 @@ class InMemoryProductRepositoryTest {
                 testSubject.getById(111222333444L);
             }
         });
-
         Assertions.assertEquals("Product by 111222333444 id not exist.", exception.getMessage());
     }
 
@@ -77,7 +75,6 @@ class InMemoryProductRepositoryTest {
     public void testGetByIdWhenProductExists() {
         Product product = new Product("Test Product", 111222333444L);
         testSubject.save(product);
-        Assertions.assertEquals(product,testSubject.getById(111222333444L));
+        Assertions.assertEquals(product, testSubject.getById(111222333444L));
     }
-
 }

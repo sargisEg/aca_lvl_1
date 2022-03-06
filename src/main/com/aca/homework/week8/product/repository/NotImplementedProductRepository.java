@@ -1,5 +1,6 @@
 package com.aca.homework.week8.product.repository;
 
+@Repository
 public class NotImplementedProductRepository implements ProductRepository {
 
     @Override

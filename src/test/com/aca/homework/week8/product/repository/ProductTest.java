@@ -35,5 +35,4 @@ class ProductTest {
         Product product = new Product("New Product", 987654321);
         Assertions.assertNotEquals(testSubject, product);
     }
-
 }

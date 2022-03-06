@@ -1,5 +1,6 @@
 package com.aca.homework.week8.product.repository;
 
+@Repository
 public class InMemoryProductRepository implements ProductRepository{
 
     private Product[] products = new Product[10_000];
@@ -11,7 +12,7 @@ public class InMemoryProductRepository implements ProductRepository{
             throw new IllegalArgumentException("Product is null");
         for (int i = 0; i < pointer; i++) {
             if(products[i].equals(product))
-                throw new ProductAlreadyExistsException();
+                throw new ProductAlreadyExistsException(product);
         }
         products[pointer] = product;
         System.out.println("Product saved");
@@ -34,6 +35,6 @@ public class InMemoryProductRepository implements ProductRepository{
             if(products[i].getId() == id)
                 return products[i];
         }
-        throw new ProductNotFoundException("Product by " + id + " id not exist.");
+        throw new ProductNotFoundException(id);
     }
 }
