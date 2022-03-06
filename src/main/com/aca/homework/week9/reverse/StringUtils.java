@@ -5,7 +5,7 @@ public class StringUtils {
     public static String reverse(String string) {
 
         if (string == null)
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Given String is null");
         if(string.equals(""))
             return "";
 
