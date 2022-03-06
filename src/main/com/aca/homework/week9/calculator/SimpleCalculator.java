@@ -33,16 +33,16 @@ public class SimpleCalculator {
 
     private String calculate(char operation, int first, int second) {
 
-        if (operation == '+') {
+        if (operation == Operation.ADDITION.getOperationSymbol()) {
             System.out.println(first + second);
             return String.valueOf(first + second);
-        } else if (operation == '-') {
+        } else if (operation == Operation.SUBTRACTION.getOperationSymbol()) {
             System.out.println(first - second);
             return String.valueOf(first - second);
-        } else if (operation == '/') {
+        } else if (operation == Operation.DIVISION.getOperationSymbol()) {
             System.out.println((double) first / (double) second);
             return String.valueOf((double) first / (double) second);
-        } else if (operation == '*') {
+        } else if (operation == Operation.MULTIPLICATION.getOperationSymbol()) {
             System.out.println(first * second);
             return String.valueOf(first * second);
         } else {
