@@ -10,6 +10,13 @@ public class SimpleCalculator {
         this.expressionSupplier = expressionSupplier;
     }
 
+    public static void main(String[] args) {
+        String txt = "a7b";
+        char n = txt.charAt(0);
+        int a = n - '0';
+        System.out.println(a);
+    }
+
     public String askAndCalculate() {
 
         String expression = expressionSupplier.getExpression();
@@ -18,36 +25,20 @@ public class SimpleCalculator {
             System.out.println("error");
             return "error";
         }
-        int first;
-        int second;
-        try {
-            first = Integer.parseInt(expression.substring(0, 1));
-            second = Integer.parseInt(expression.substring(2));
-        } catch (NumberFormatException e) {
+
+        int first = expression.charAt(0) - '0';
+        int second = expression.charAt(2) - '0';
+
+        if(first > 9 || second > 9) {
             System.out.println("error");
             return "error";
         }
 
-        return calculate(expression.charAt(1), first, second);
-    }
-
-    private String calculate(char operation, int first, int second) {
-
-        if (operation == Operation.ADDITION.getOperationSymbol()) {
-            System.out.println(first + second);
-            return String.valueOf(first + second);
-        } else if (operation == Operation.SUBTRACTION.getOperationSymbol()) {
-            System.out.println(first - second);
-            return String.valueOf(first - second);
-        } else if (operation == Operation.DIVISION.getOperationSymbol()) {
-            System.out.println((double) first / (double) second);
-            return String.valueOf((double) first / (double) second);
-        } else if (operation == Operation.MULTIPLICATION.getOperationSymbol()) {
-            System.out.println(first * second);
-            return String.valueOf(first * second);
-        } else {
+        Operation operation = Operation.of(expression.charAt(1));
+        if(operation == null) {
             System.out.println("error");
             return "error";
         }
+        return String.valueOf(operation.calculate(first,second));
     }
 }

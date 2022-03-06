@@ -80,7 +80,7 @@ class SimpleCalculatorTest {
                 return "7+7";
             }
         });
-        Assertions.assertEquals("14", testSubject.askAndCalculate());
+        Assertions.assertEquals("14.0", testSubject.askAndCalculate());
     }
 
     @Test
@@ -102,7 +102,7 @@ class SimpleCalculatorTest {
                 return "7-7";
             }
         });
-        Assertions.assertEquals("0", testSubject.askAndCalculate());
+        Assertions.assertEquals("0.0", testSubject.askAndCalculate());
     }
 
     @Test
@@ -113,7 +113,7 @@ class SimpleCalculatorTest {
                 return "2*5";
             }
         });
-        Assertions.assertEquals("10", testSubject.askAndCalculate());
+        Assertions.assertEquals("10.0", testSubject.askAndCalculate());
     }
 
 
