@@ -11,10 +11,9 @@ public class StringUtils {
 
         StringBuilder stringBuilder = new StringBuilder("");
 
-        if (string.length() == 1)
-            return stringBuilder.append(string.charAt(0)).toString();
-        stringBuilder.append(reverse(string.substring(1)));
-        stringBuilder.append(string.charAt(0));
+        for (int i = string.length() - 1; i >= 0; i--) {
+            stringBuilder.append(string.charAt(i));
+        }
         return stringBuilder.toString();
     }
 }
