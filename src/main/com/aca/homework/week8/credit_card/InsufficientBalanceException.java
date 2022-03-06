@@ -4,10 +4,8 @@ import javax.naming.InsufficientResourcesException;
 
 public class InsufficientBalanceException extends RuntimeException {
 
-    public InsufficientBalanceException(String explanation) {
-        super(explanation);
-    }
-
-    public InsufficientBalanceException() {
+    public InsufficientBalanceException(int amount, int balance) {
+        super("Not enough money in card. Amount to be paid: " + amount
+                + " card balance: " + balance);
     }
 }
