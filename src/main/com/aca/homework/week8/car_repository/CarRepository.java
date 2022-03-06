@@ -20,9 +20,9 @@ public class CarRepository {
     public Car findByVin(String vin) {
         if(pointer == 0)
             return null;
-        for (Car car : cars) {
-            if(car.getVin().equals(vin))
-                return car;
+        for (int i = 0; i < pointer; i++) {
+            if(cars[i].getVin().equals(vin))
+                return cars[i];
         }
         return null;
     }
