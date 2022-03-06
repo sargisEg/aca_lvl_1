@@ -2,7 +2,7 @@ package com.aca.homework.week9.calculator;
 
 import java.util.Scanner;
 
-public class ExpressionSupplierImpl implements ExpressionSupplier{
+public class UserInputExpressionSupplier implements ExpressionSupplier {
 
     @Override
     public String getExpression() {
