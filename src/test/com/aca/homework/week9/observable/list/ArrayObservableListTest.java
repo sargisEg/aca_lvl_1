@@ -3,22 +3,20 @@ package com.aca.homework.week9.observable.list;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ArrayObservableListTest {
 
     @Test
     public void testAddWhenThereIsNoAddedListeners() {
-        ArrayObservableList<String> testSubject = new ArrayObservableList<>();
-        Assertions.assertEquals(0,testSubject.size());
+        ObservableList<String> testSubject = new ArrayObservableList<>();
+        Assertions.assertEquals(0, testSubject.size());
         testSubject.add("test");
-        Assertions.assertEquals(1,testSubject.size());
-        Assertions.assertEquals("test",testSubject.get(0));
+        Assertions.assertEquals(1, testSubject.size());
+        Assertions.assertEquals("test", testSubject.get(0));
     }
 
     @Test
     public void testAddWhenThereIsOneAddedListener() {
-        ArrayObservableList<Integer> testSubject = new ArrayObservableList<>();
+        ObservableList<Integer> testSubject = new ArrayObservableList<>();
         MockListChangeListener<Integer> mockListener = new MockListChangeListener<>();
         testSubject.addListener(mockListener);
         testSubject.add(Integer.valueOf(98));
@@ -27,7 +25,7 @@ class ArrayObservableListTest {
 
     @Test
     public void testAddWhenThereAreTwoAddedListener() {
-        ArrayObservableList<Integer> testSubject = new ArrayObservableList<>();
+        ObservableList<Integer> testSubject = new ArrayObservableList<>();
         MockListChangeListener<Integer> mockListener1 = new MockListChangeListener<>();
         MockListChangeListener<Integer> mockListener2 = new MockListChangeListener<>();
         testSubject.addListener(mockListener1);

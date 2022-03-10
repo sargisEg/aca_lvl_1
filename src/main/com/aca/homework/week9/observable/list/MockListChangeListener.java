@@ -1,6 +1,6 @@
 package com.aca.homework.week9.observable.list;
 
-public class MockListChangeListener<T> implements ListChangeListener<T>{
+public class MockListChangeListener<T> implements ListChangeListener<T> {
 
     private int methodCount;
 

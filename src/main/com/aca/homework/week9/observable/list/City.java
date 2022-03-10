@@ -6,7 +6,7 @@ public class City {
     private City() {
     }
 
-    public static City create(){
+    public static City of() {
 
         City city = new City();
         city.population.addListener(new ListChangeListener<Human>() {
@@ -25,7 +25,7 @@ public class City {
 
             private void pause500ms() {
                 long start = System.currentTimeMillis();
-                while (System.currentTimeMillis() != start + 500);
+                while (System.currentTimeMillis() != start + 500) ;
             }
         });
 

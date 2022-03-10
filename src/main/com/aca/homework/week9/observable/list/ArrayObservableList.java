@@ -3,7 +3,7 @@ package com.aca.homework.week9.observable.list;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArrayObservableList<T> implements ObservableList<T>{
+public class ArrayObservableList<T> implements ObservableList<T> {
 
     private Object[] array = new Object[10_000];
     private int index = 0;
@@ -34,6 +34,7 @@ public class ArrayObservableList<T> implements ObservableList<T>{
 
     @Override
     public void addListener(ListChangeListener<T> listener) {
-        listenersList.add(listener);
+        if (listener != null)
+            listenersList.add(listener);
     }
 }
