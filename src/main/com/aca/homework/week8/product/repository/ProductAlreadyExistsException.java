@@ -2,7 +2,7 @@ package com.aca.homework.week8.product.repository;
 
 public class ProductAlreadyExistsException extends RuntimeException {
 
-    public ProductAlreadyExistsException(Product product) {
-        super("Product " + product + " already exist");
+    public ProductAlreadyExistsException(Long id) {
+        super("Product with id: " + id + " already exist");
     }
 }
