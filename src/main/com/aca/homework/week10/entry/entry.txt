@@ -1,0 +1,9 @@
+Create an Entry generic interface that has the following methods:
+
+K key();
+V value();
+
+Create EntryImpl generic implementation and write unit tests when the
+ key type is a String and the
+ value type is an Integer.
+
