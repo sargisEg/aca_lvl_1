@@ -71,4 +71,12 @@ class MapTest {
         Assertions.assertEquals(1, testSubject.size());
     }
 
+    @Test
+    public void testDuplicateValue() {
+        testSubject.put("Key1", "Value1");
+        testSubject.put("Key2", "Value2");
+        testSubject.put("Key1", "NewValue1");
+        Assertions.assertEquals("NewValue1", testSubject.getValue("Key1"));
+    }
+
 }

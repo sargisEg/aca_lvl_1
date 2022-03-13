@@ -9,10 +9,23 @@ public class Map {
 
     public void put(@NotNull String key, @NotNull String value) {
         if (key == null)
-            throw new IllegalArgumentException("Key is null");
+            throw new IllegalArgumentException("The Key is null");
         if (value == null)
-            throw new IllegalArgumentException("Value is null");
-        entries.add(Entry.of(key, value));
+            throw new IllegalArgumentException("The Value is null");
+        Entry entry = Entry.of(key, value);
+        if (getValue(key) == null) {
+            entries.add(entry);
+        } else {
+            entries.set(entries.indexOf(getIndexByKey(key)), entry);
+        }
+    }
+
+    private Entry getIndexByKey(String key) {
+        for (Entry entry : entries) {
+            if (entry.key().equals(key))
+                return entry;
+        }
+        return null;
     }
 
     public String getValue(@NotNull String key) {
