@@ -5,35 +5,32 @@ import java.util.List;
 
 public class Map {
 
-    private List<String> values = new ArrayList<>();
-    private List<String> keys = new ArrayList<>();
-    private int size = 0;
+    private List<Entry> entries = new ArrayList<>();
 
     public void put(@NotNull String key, @NotNull String value) {
         if (key == null)
             throw new IllegalArgumentException("Key is null");
         if (value == null)
             throw new IllegalArgumentException("Value is null");
-        values.add(value);
-        keys.add(key);
-        size++;
+        entries.add(Entry.of(key, value));
     }
 
     public String getValue(@NotNull String key) {
         if (key == null)
             throw new IllegalArgumentException("Value is null");
-        int index = keys.indexOf(key);
-        if(index != -1)
-            return values.get(index);
+        for (Entry entry : entries) {
+            if (entry.key().equals(key))
+                return entry.value();
+        }
         return null;
     }
 
     public int size() {
-        return size;
+        return entries.size();
     }
 
     public boolean isEmpty() {
-        return size == 0;
+        return entries.isEmpty();
     }
 
 }
