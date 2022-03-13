@@ -1,11 +1,11 @@
 package com.aca.homework.week10.entry;
 
-public class EntryImpl<K, V> implements Entry<K, V> {
+class EntryImpl<K, V> implements Entry<K, V> {
 
     private K key;
     private V value;
 
-    public EntryImpl(K k, V v) {
+    EntryImpl(K k, V v) {
         key = k;
         value = v;
     }
