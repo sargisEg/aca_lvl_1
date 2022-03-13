@@ -2,21 +2,21 @@ package com.aca.homework.week10.entry;
 
 public class EntryImpl<K, V> implements Entry<K, V> {
 
-    private K K;
-    private V V;
+    private K key;
+    private V value;
 
     public EntryImpl(K k, V v) {
-        K = k;
-        V = v;
+        key = k;
+        value = v;
     }
 
     @Override
     public K key() {
-        return K;
+        return key;
     }
 
     @Override
     public V value() {
-        return V;
+        return value;
     }
 }
