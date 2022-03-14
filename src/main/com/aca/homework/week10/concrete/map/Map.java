@@ -12,15 +12,16 @@ public class Map {
             throw new IllegalArgumentException("The Key is null");
         if (value == null)
             throw new IllegalArgumentException("The Value is null");
-        Entry entry = Entry.of(key, value);
-        if (getValue(key) == null) {
-            entries.add(entry);
+        Entry newEntry = Entry.of(key, value);
+        Entry myEntry = getEntryByKey(key);
+        if (myEntry != null) {
+            entries.set(entries.indexOf(myEntry), newEntry);
         } else {
-            entries.set(entries.indexOf(getIndexByKey(key)), entry);
+            entries.add(newEntry);
         }
     }
 
-    private Entry getIndexByKey(String key) {
+    private Entry getEntryByKey(String key) {
         for (Entry entry : entries) {
             if (entry.key().equals(key))
                 return entry;
@@ -31,11 +32,8 @@ public class Map {
     public String getValue(@NotNull String key) {
         if (key == null)
             throw new IllegalArgumentException("Value is null");
-        for (Entry entry : entries) {
-            if (entry.key().equals(key))
-                return entry.value();
-        }
-        return null;
+        Entry entryByKey = getEntryByKey(key);
+        return entryByKey == null ? null : entryByKey.value();
     }
 
     public int size() {
