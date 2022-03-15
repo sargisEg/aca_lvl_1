@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 
 class ServletRequestObjectFactoryTest {
 
-    private ObjectFactory<ServletRequestImpl> testSubject;
+    private ObjectFactory testSubject;
 
     @BeforeEach
     public void setUp() {
-        testSubject = new ServletRequestObjectFactory<>();
+        testSubject = new ServletRequestObjectFactory();
     }
 
     @Test
@@ -20,16 +20,16 @@ class ServletRequestObjectFactoryTest {
 
     @Test
     public void testGet2Objects() {
-        ServletRequest testObject1 = testSubject.getObject();
-        ServletRequest testObject2 = testSubject.getObject();
+        ServletRequest testObject1 = (ServletRequest) testSubject.getObject();
+        ServletRequest testObject2 = (ServletRequest) testSubject.getObject();
         Assertions.assertNotEquals(testObject1, testObject2);
     }
 
     @Test
     public void testGet3Objects() {
-        ServletRequest testObject1 = testSubject.getObject();
-        ServletRequest testObject2 = testSubject.getObject();
-        ServletRequest testObject3 = testSubject.getObject();
+        ServletRequest testObject1 = (ServletRequest) testSubject.getObject();
+        ServletRequest testObject2 = (ServletRequest) testSubject.getObject();
+        ServletRequest testObject3 = (ServletRequest) testSubject.getObject();
 
         Assertions.assertNotEquals(testObject1, testObject2);
         Assertions.assertNotEquals(testObject1, testObject3);

@@ -1,11 +1,9 @@
 package com.aca.homework.week10.object.factory;
 
-public class ServletRequestObjectFactory<T extends ServletRequest> implements ObjectFactory<T> {
+public class ServletRequestObjectFactory implements ObjectFactory {
 
     @Override
-    public T getObject() {
-        @SuppressWarnings("unchecked")
-        T t = (T) new ServletRequestImpl();
-        return t;
+    public ServletRequest getObject() {
+        return new ServletRequestImpl();
     }
 }
