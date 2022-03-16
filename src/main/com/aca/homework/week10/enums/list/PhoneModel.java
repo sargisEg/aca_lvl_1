@@ -5,24 +5,34 @@ import java.util.List;
 
 public enum PhoneModel {
 
-    NOKIA_1100 {
+    NOKIA_1100 (Collections.emptyList()) {
         @Override
         public List<String> getCameraDescriptionList() {
-            return Collections.emptyList();
+            return getCameraDescription();
         }
     },
-    NOKIA_3110 {
+    NOKIA_3110 (Collections.singletonList("back camera")){
         @Override
         public List<String> getCameraDescriptionList() {
-            return Collections.singletonList("back camera");
+            return getCameraDescription();
         }
     },
-    GALAXY_S2 {
+    GALAXY_S2 (List.of("back camera", "front camera")){
         @Override
         public List<String> getCameraDescriptionList() {
-            return List.of("back camera", "front camera");
+            return getCameraDescription();
         }
     };
+
+    private List<String> cameraDescription;
+
+    PhoneModel(List<String> cameraDescription) {
+        this.cameraDescription = cameraDescription;
+    }
+
+    public List<String> getCameraDescription() {
+        return cameraDescription;
+    }
 
     public abstract List<String> getCameraDescriptionList();
 }
