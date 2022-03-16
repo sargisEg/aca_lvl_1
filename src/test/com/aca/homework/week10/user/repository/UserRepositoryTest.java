@@ -1,6 +1,7 @@
 package com.aca.homework.week10.user.repository;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -8,7 +9,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserRepositoryTest {
 
-    private final CrudRepository testSubject = new UserRepository();
+    private CrudRepository testSubject;
+
+
+    @BeforeEach
+    public void setUp() {
+        testSubject = new UserRepository();
+    }
 
     @Test
     public void testSaveWhenUserIsNull() {

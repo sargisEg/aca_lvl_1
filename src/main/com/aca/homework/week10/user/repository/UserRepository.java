@@ -38,7 +38,7 @@ public class UserRepository implements CrudRepository<User> {
             }
         }
 
-        throw new UserNotFoundException(entity);
+        throw new UserNotFoundException(entity.getId());
     }
 
     @Override
