@@ -1,0 +1,28 @@
+Create a Map class that has the following methods:
+
+void put(@NotNull String key, @NotNull String value);
+
+String getValue(@NotNull String key);
+
+int size();
+
+boolean isEmpty();
+
+
+A user can add a value for the given key and retrieve it back.
+
+@NotNull annotation should be created too.
+
+e.g a user can put "+3743743743" as a value for the "Java Help Centre Phone Number" key.
+
+Create MapTest class and write the following methods:
+
+testPutWhenKeyIsNull()
+testPutWhenValueIsNull()
+testGetValueWhenValueIsNull()
+testGetValueWhenKeyIsNoutFound() //should return null
+testGetValueWhenKeyIsFound() // put a key value pair and assert that the value is correct
+testSizeWhenEmpty()
+testSizeWhen1PairIsAdded()
+
+
