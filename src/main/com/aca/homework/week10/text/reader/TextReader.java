@@ -1,15 +1,15 @@
 package com.aca.homework.week10.text.reader;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class TextReader {
 
     public static List<String> readLines() throws FileNotFoundException {
-        List<String> lines = new ArrayList<>(1000);
+        List<String> lines = new LinkedList<>();
 
         Scanner scanner = new Scanner(
                 new File("/home/sargise/Desktop/Java/aca_lvl_1_/src/main/com/aca/homework/week10/text/reader/doc-numbers.txt"
@@ -22,8 +22,12 @@ public class TextReader {
     }
 
     public static <E> void print (List<E> list) {
-        for (E e : list) {
-            System.out.println(list.indexOf(e) + ": " + e);
+        Iterator<E> itr = list.iterator();
+        int i = 0;
+        while (itr.hasNext()) {
+            System.out.println(i + ": " + itr.next());
+            i++;
         }
     }
+
 }
