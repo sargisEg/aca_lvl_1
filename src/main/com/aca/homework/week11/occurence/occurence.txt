@@ -1,0 +1,17 @@
+Create a KeyCalulator class that has askAndCalculate method.
+ The method asks a user to input the numbers infinetlly until the user writes 'end'
+ then it prints and returns a map of number of occurrences.
+
+
+e.g
+1
+1
+1
+3
+1
+end
+
+[{1=4, 3=1}]
+
+
+Create KeyCalulatorTest and write unit tests.
