@@ -20,16 +20,16 @@ class ServletRequestObjectFactoryTest {
 
     @Test
     public void testGet2Objects() {
-        ServletRequest testObject1 = (ServletRequest) testSubject.getObject();
-        ServletRequest testObject2 = (ServletRequest) testSubject.getObject();
+        ServletRequest testObject1 = testSubject.getObject();
+        ServletRequest testObject2 = testSubject.getObject();
         Assertions.assertFalse(testObject1 == testObject2);
     }
 
     @Test
     public void testGet3Objects() {
-        ServletRequest testObject1 = (ServletRequest) testSubject.getObject();
-        ServletRequest testObject2 = (ServletRequest) testSubject.getObject();
-        ServletRequest testObject3 = (ServletRequest) testSubject.getObject();
+        ServletRequest testObject1 = testSubject.getObject();
+        ServletRequest testObject2 = testSubject.getObject();
+        ServletRequest testObject3 = testSubject.getObject();
 
         Assertions.assertFalse(testObject1 == testObject2);
         Assertions.assertFalse(testObject1 == testObject3);
