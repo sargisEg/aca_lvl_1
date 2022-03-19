@@ -16,7 +16,7 @@ public class KeyCalculator {
         return occurrencesMap.get(key);
     }
 
-    public void askAndCalculate() {
+    public Map<Integer, Integer> askAndCalculate() {
         while (true) {
             String input = numberSupplier.getNumber();
             if (input.equals("end")) {
@@ -34,9 +34,6 @@ public class KeyCalculator {
 
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new KeyCalculator(new UserNumberSupplier()).askAndCalculate();
+        return occurrencesMap;
     }
 }
