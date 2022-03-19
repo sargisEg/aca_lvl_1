@@ -3,6 +3,8 @@ package com.aca.homework.week10.enums.list;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 class PhoneModelTest {
 
     @Test
@@ -12,15 +14,17 @@ class PhoneModelTest {
 
     @Test
     public void testNokia3110CameraDescriptionList() {
-        Assertions.assertEquals(1, PhoneModel.NOKIA_3110.getCameraDescriptionList().size());
-        Assertions.assertEquals("back camera", PhoneModel.NOKIA_3110.getCameraDescriptionList().get(0));
+        List<String> testList = PhoneModel.NOKIA_3110.getCameraDescriptionList();
+        Assertions.assertEquals(1, testList.size());
+        Assertions.assertEquals("back camera", testList.get(0));
     }
 
     @Test
     public void testGalaxyS2CameraDescriptionList() {
-        Assertions.assertEquals(2, PhoneModel.GALAXY_S2.getCameraDescriptionList().size());
-        Assertions.assertEquals("back camera", PhoneModel.GALAXY_S2.getCameraDescriptionList().get(0));
-        Assertions.assertEquals("front camera", PhoneModel.GALAXY_S2.getCameraDescriptionList().get(1));
+        List<String> testList = PhoneModel.GALAXY_S2.getCameraDescriptionList();
+        Assertions.assertEquals(2, testList.size());
+        Assertions.assertEquals("back camera", testList.get(0));
+        Assertions.assertEquals("front camera", testList.get(1));
     }
 
 }

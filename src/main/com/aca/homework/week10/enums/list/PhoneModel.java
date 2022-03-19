@@ -5,11 +5,11 @@ import java.util.List;
 
 public enum PhoneModel {
 
-    NOKIA_1100 (Collections.emptyList()),
-    NOKIA_3110 (Collections.singletonList("back camera")),
-    GALAXY_S2 (List.of("back camera", "front camera"));
+    NOKIA_1100(Collections.emptyList()),
+    NOKIA_3110(Collections.singletonList("back camera")),
+    GALAXY_S2(List.of("back camera", "front camera"));
 
-    private List<String> cameraDescription;
+    private final List<String> cameraDescription;
 
     PhoneModel(List<String> cameraDescription) {
         this.cameraDescription = cameraDescription;
