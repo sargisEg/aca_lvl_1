@@ -1,0 +1,22 @@
+Create a HelloTranslater interface that has the following methods:
+
+String hello();
+
+LanguageType type();
+
+Create 3 implementations for English, French and Russian languages.
+
+The English, French and Russian implementations hello methods should return "Hello", "Salut" and "Привет" correspondingly.
+
+Create a HelloTranslaterResolver class that takes a list of HelloTranslaters in constructor,
+ and add them into the global Map<LanguageType, HelloTransalter> instance.
+
+The HelloTranslaterResolver has a resolve method that takes a LanguageType and returns a HelloTranslater.
+
+Create EnglishHelloTranslaterTest, FrenchHelloTranslaterTest, RussianHelloTranslaterTest classes and unit tests for hello and type methods.
+
+Create HelloTranslaterResolver class and test the resolve in conjunction with hello method when the LanguageType is ENGLISH, FRENCH and RUSSIAN
+
+testResolveWithHelloMethodWhenLanguageIsEnglish()
+testResolveWithHelloMethodWhenLanguageIsFrench()
+testResolveWithHelloMethodWhenLanguageIsRussian()
