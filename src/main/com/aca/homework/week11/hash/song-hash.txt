@@ -1,0 +1,11 @@
+Crate a Singer class that has firstName and lastName fields only.
+
+Create a Song class that has the following fields:
+
+Singer singer
+String name
+long duration
+float rating
+
+Implement equals and hashCodes of Singer and Song classes.
+For each class write unit test to be sure that 2 equal objects have the same hash codes.
