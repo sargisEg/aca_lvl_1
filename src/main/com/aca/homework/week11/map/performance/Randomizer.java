@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Randomizer {
 
-    private char[] elements = {'a', 'b', 'c', 'd', 'e'};
+    private final char[] elements = {'a', 'b', 'c', 'd', 'e'};
 
     public String get8SizedString() {
         StringBuilder builder = new StringBuilder();

@@ -5,9 +5,8 @@ import java.util.Map;
 
 public class LowPerformanceMapValueCountCalculator implements MapValueCountCalculator {
 
-    private Map<String, Integer> strings = new HashMap<>(10, 0.5f);
-
-
+    private final Map<String, Integer> strings = new HashMap<>();
+    
     @Override
     public StringOccurrence populateAndCalculate(int numberOfRandomStrings) {
         Randomizer randomizer = new Randomizer();
@@ -15,7 +14,7 @@ public class LowPerformanceMapValueCountCalculator implements MapValueCountCalcu
 
         for (int i = 0; i < numberOfRandomStrings; i++) {
             String stringKey = randomizer.get8SizedString();
-            if(strings.containsKey(stringKey)) {
+            if (strings.containsKey(stringKey)) {
                 int keyCount = strings.get(stringKey) + 1;
                 strings.put(stringKey, keyCount);
                 stringOccurrence.checkMaxMinOccurrence(stringKey, keyCount);
