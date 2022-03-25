@@ -10,9 +10,8 @@ class KeyCalculatorTest {
     @Test
     public void testAskAndCalculate() {
         testSubject = new KeyCalculator(
-                        new NumberSupplierForTest(
-                        new String[]{"1", "1", "5", "2", "3", "5", "2", "2", "2", "2", "end"}
-                        ));
+                new NumberSupplierForTest(new String[]{"1", "1", "5", "2", "3", "5", "2", "2", "2", "2", "end"})
+        );
         testSubject.askAndCalculate();
         Assertions.assertEquals(2, testSubject.getValue(1));
         Assertions.assertEquals(2, testSubject.getValue(5));
