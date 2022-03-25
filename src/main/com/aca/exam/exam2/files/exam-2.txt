@@ -1,0 +1,90 @@
+Create a CrudRepository<ENTITY, ID> interface that has the following methods:
+
+@Nullable
+ENTITY findById(ID id);
+List<ENTITY> findAll();
+-------------------------------------------------------------------------------
+Create a FileSourceUserRepository that implements CrudRepository and works with User type.
+
+The User class has the following fields:
+
+String id
+String firstName
+String lastName
+
+Each method of FileSourceUserRepository should read a data from the users.txt file,
+ process it and return the result without encapsulating any object in it for data storing purposes.
+ There is no need to create a separate class to read a data from a file.
+
+The FileSourceUserRepository should be a singleton.
+-------------------------------------------------------------------------------
+For unit tests it is okay to allow the test subject to read a real data from .txt file.
+
+Create FileSourceUserRepositoryTest class and the following tests:
+
+testGetInstance()
+testFindByIdWhenIdIsNotFound()
+testFindByIdWhenIdIsFound()  // test when the id is: barracudaassign
+testFindAll() // assert that the list is equal to what we expect
+
+-------------------------------------------------------------------------------
+Create a FileSourceOrderRepository that implements CrudRepository and works with the Order type.
+
+The Order class has the following fields:
+
+int id
+String name
+int price
+User purchasedUser
+
+Each method of FileSourceOrderRepository should read data from the orders.txt file only,
+ process it and return the result without encapsulating any object in it for data storing purposes.
+
+The Order object should contain purchasedUser object that is properly instantiated
+(an instance of FileSourceUserRepository class can be used to fetch the user).
+
+The FileSourceOrderRepository should not instantiate the FileSourceUserRepository instance in it,
+ instead, should take it as a constructor parameter.
+
+-------------------------------------------------------------------------------
+For unit tests it is okay to allow the test subject to read a real data from .txt file.
+
+Create FileSourceOrderRepositoryTest class and the following tests:
+
+testFindByIdWhenIdIsNotFound()
+testFindByIdWhenIdIsFound()  // test when the id is: 9
+testFindAllSize() // assert the list size only
+-------------------------------------------------------------------------------
+
+Create a Repository interface and annotate the FileSourceOrderRepository and FileSourceUserRepository classes.
+
+-------------------------------------------------------------------------------
+
+Add a List<Order> findAllByUserId(String userId) method in FileSourceOrderRepository class and implement it.
+
+-------------------------------------------------------------------------------
+
+Wite a testFindAllByUserId() unit test and assert the result when the user id is: shawlinspire
+
+-------------------------------------------------------------------------------
+
+Create a OrderPrinterRunnable class that implements the Runnable interface.
+
+
+The PrinterRunnable should not create a new instance of repositories in it,
+ instead, should take them as a constructor parameter.
+
+The OrderPrinterRunnable should print the order for the given order id.
+
+
+Create a List of OrderPrinterRunnable to print orders having an id from 1 to 9.
+
+Write a loop to run order printer runnable.
+-------------------------------------------------------------------------------
+
+
+
+
+
+
+
