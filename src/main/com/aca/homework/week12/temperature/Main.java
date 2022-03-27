@@ -21,6 +21,6 @@ public class Main {
             dailyTemperatures.add(reader.read());
         }
 
-        System.out.println(dailyTemperatures);
+        dailyTemperatures.forEach(System.out::println);
     }
 }
