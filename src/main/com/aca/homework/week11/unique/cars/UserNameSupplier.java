@@ -2,16 +2,16 @@ package com.aca.homework.week11.unique.cars;
 
 import java.util.Scanner;
 
-public class UserNameInput implements NameInput {
+public class UserNameSupplier implements NameSupplier {
 
     private final Scanner scanner;
 
-    public UserNameInput() {
+    public UserNameSupplier() {
         this.scanner = new Scanner(System.in);
     }
 
     @Override
-    public String ask() {
+    public String get() {
         return scanner.nextLine();
     }
 }

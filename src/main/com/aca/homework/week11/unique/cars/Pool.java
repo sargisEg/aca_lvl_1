@@ -4,31 +4,31 @@ import java.util.*;
 
 public class Pool {
 
-    private final NameInput nameInput;
-    private final Set<String> cars;
+    private final NameSupplier nameInput;
+    private final Set<Car> cars;
 
-    public Pool(NameInput nameInput) {
+    public Pool(NameSupplier nameInput) {
         this.nameInput = nameInput;
         cars = new TreeSet<>();
     }
 
     public static void main(String[] args) {
-        Pool pool = new Pool(new UserNameInput());
+        Pool pool = new Pool(new UserNameSupplier());
         pool.askAndCalculate();
         pool.print();
     }
 
-    public Set<String> askAndCalculate() {
+    public Set<Car> askAndCalculate() {
         System.out.println("please type your name, the brand, and model of your car");
-        String[] nameAndCar = nameInput.ask().split(" ");
+        String[] nameAndCar = nameInput.get().split(" ");
 
         while (!nameAndCar[0].equals("finish")) {
             if (nameAndCar.length != 3) {
                 System.out.println("Pleas enter valid format");
             } else {
-                cars.add(nameAndCar[1] + " " + nameAndCar[2]);
+                cars.add(new Car(nameAndCar[1], nameAndCar[2]));
             }
-            nameAndCar = nameInput.ask().split(" ");
+            nameAndCar = nameInput.get().split(" ");
         }
         return cars;
     }
