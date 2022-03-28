@@ -9,10 +9,11 @@ public class StopWatch {
         this.displayType = displayType;
     }
 
-    public void start() throws InterruptedException {
+    public void start() {
         while (true) {
             System.out.println(displayType.getStringRepresentationOfMilliseconds(milliseconds));
-            Thread.sleep(10);
+            long start = System.currentTimeMillis();
+            while (System.currentTimeMillis() - start < 10);
             milliseconds += 10;
         }
     }

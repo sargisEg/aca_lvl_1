@@ -14,6 +14,6 @@ class DisplayTypeTest {
     @Test
     public void testWhenTypeIsSecondsAndMillis() {
         DisplayType testSubject = DisplayType.SECONDS_AND_MILLIS;
-        Assertions.assertEquals("36 sec  542 milSec", testSubject.getStringRepresentationOfMilliseconds(36542));
+        Assertions.assertEquals("36.542 sec", testSubject.getStringRepresentationOfMilliseconds(36542));
     }
 }
