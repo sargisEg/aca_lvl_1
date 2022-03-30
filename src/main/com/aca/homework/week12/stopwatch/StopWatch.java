@@ -14,7 +14,11 @@ public class StopWatch {
             System.out.println(displayType.getStringRepresentationOfMilliseconds(milliseconds));
             long start = System.currentTimeMillis();
             while (System.currentTimeMillis() - start < 10);
-            milliseconds += 10;
+            milliseconds += (System.currentTimeMillis() - start);
         }
+    }
+
+    public static void main(String[] args) {
+        new StopWatch(DisplayType.SECONDS_AND_MILLIS).start();
     }
 }
