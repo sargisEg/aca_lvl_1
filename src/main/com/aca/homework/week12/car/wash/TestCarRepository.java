@@ -7,24 +7,19 @@ import java.util.Map;
 public class TestCarRepository implements CarRepository {
 
     private String name;
-    private final Map<Object, Integer> washedCars;
+    private final CarData carData;
 
     public TestCarRepository() {
-        this.washedCars = new HashMap<>();}
+        this.carData = new CarData();
+    }
 
     @Override
     public void save(Object data) {
-
-        if (!washedCars.containsKey(data) || washedCars.get(data) == 5) {
-            washedCars.put(data, 1);
-        } else {
-            washedCars.put(data, washedCars.get(data) + 1);
-        }
-
+        carData.add(data);
     }
 
     @Override
     public Object load() {
-        return washedCars;
+        return carData.getData();
     }
 }
