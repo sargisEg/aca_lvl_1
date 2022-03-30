@@ -2,7 +2,7 @@ package com.aca.homework.week12.temperature;
 
 import java.io.Serializable;
 
-public class DailyTemperature implements Serializable {
+public class DailyTemperature {
 
     private final int dayNumber;
     private final float degree;

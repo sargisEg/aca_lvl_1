@@ -5,20 +5,15 @@ import java.io.*;
 public class DailyTemperatureFileItemReader implements ItemReader<DailyTemperature> {
 
     private static final String PATH = "/home/sargise/Desktop/Java/aca_lvl_1_/src/main/com/aca/homework/week12/temperature/";
-    private FileInputStream fileInputStream = null;
+    private final FileInputStream fileInputStream;
+
+    public DailyTemperatureFileItemReader(FileInputStream fileInputStream) {
+        this.fileInputStream = fileInputStream;
+    }
 
     @Override
     public DailyTemperature read() {
-
-        if (fileInputStream == null) {
-            try {
-                fileInputStream = new FileInputStream((PATH + "daily-temp-data.txt"));
-            } catch (FileNotFoundException e) {
-                throw new RuntimeException("Not found file in " + PATH, e);
-            }
-        }
-
-        ObjectInputStream objectInputStream = null;
+        ObjectInputStream objectInputStream;
 
         try {
             objectInputStream = new ObjectInputStream(fileInputStream);
