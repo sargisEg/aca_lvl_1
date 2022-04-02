@@ -4,12 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 
-    public User(String userName, String firstName, String age) {
-        this.userName = userName;
-        this.firstName = firstName;
-        this.age = age;
-    }
-
     @JsonProperty("username")
     private final String userName;
 
@@ -18,6 +12,12 @@ public class User {
 
     @JsonProperty("age")
     private final String age;
+
+    public User(String userName, String firstName, String age) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.age = age;
+    }
 
 
 }

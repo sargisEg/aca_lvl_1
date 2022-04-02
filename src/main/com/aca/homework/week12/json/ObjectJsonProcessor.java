@@ -12,7 +12,7 @@ public class ObjectJsonProcessor {
         Field[] declaredFields = o.getClass().getDeclaredFields();
         for (Field declaredField : declaredFields) {
             JsonProperty annotation = declaredField.getAnnotation(JsonProperty.class);
-            if(annotation != null) {
+            if (annotation != null) {
                 String key = annotation.value();
                 json.append("\"" + key + "\": \"");
                 declaredField.setAccessible(true);
