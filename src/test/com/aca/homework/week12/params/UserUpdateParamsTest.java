@@ -7,9 +7,8 @@ class UserUpdateParamsTest {
 
     @Test
     public void testConstructor() {
-        UserUpdateParams testSubject = new UserUpdateParams("user", "Jon", "35");
-        Assertions.assertNotNull(testSubject.getAge());
-        Assertions.assertNotNull(testSubject.getUsername());
-        Assertions.assertNotNull(testSubject.getFirstName());
+        Assertions.assertThrows(NullStringException.class, () -> {
+            UserUpdateParams testSubject = new UserUpdateParams("user", null, "35");
+        });
     }
 }

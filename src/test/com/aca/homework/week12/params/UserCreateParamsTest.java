@@ -7,9 +7,8 @@ class UserCreateParamsTest {
 
     @Test
     public void testConstructor() {
-        UserCreateParams testSubject = new UserCreateParams("user", "Jon", "35");
-        Assertions.assertNotNull(testSubject.getAge());
-        Assertions.assertNotNull(testSubject.getUsername());
-        Assertions.assertNotNull(testSubject.getFirstName());
+        Assertions.assertThrows(NullStringException.class, () -> {
+            UserCreateParams testSubject = new UserCreateParams("user", null, "35");
+        });
     }
 }

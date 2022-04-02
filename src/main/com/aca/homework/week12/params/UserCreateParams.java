@@ -7,13 +7,15 @@ public class UserCreateParams {
     private final String age;
 
     public UserCreateParams(String username, String firstName, String age) {
-        this.username = setNotNullString(username);
-        this.firstName = setNotNullString(firstName);
-        this.age = setNotNullString(age);
+        this.username = checkForNullAndReturnString(username);
+        this.firstName = checkForNullAndReturnString(firstName);
+        this.age = checkForNullAndReturnString(age);
     }
 
-    private String setNotNullString(String string) {
-        return string == null ? "" : string;
+    private String checkForNullAndReturnString(String string) {
+        if (string == null)
+            throw new NullStringException("Value of field cannot be a null");
+        return string;
     }
 
     public String getUsername() {
