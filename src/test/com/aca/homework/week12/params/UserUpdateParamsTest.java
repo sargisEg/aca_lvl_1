@@ -6,9 +6,22 @@ import org.junit.jupiter.api.Test;
 class UserUpdateParamsTest {
 
     @Test
-    public void testConstructor() {
+    public void testConstructorFirstNameNull() {
         Assertions.assertThrows(NullStringException.class, () -> {
             UserUpdateParams testSubject = new UserUpdateParams("user", null, "35");
+        });
+    }
+
+    @Test
+    public void testConstructorUsernameNull() {
+        Assertions.assertThrows(NullStringException.class, () -> {
+            UserUpdateParams testSubject = new UserUpdateParams(null, "name", "35");
+        });
+    }
+    @Test
+    public void testConstructorAgeNull() {
+        Assertions.assertThrows(NullStringException.class, () -> {
+            UserUpdateParams testSubject = new UserUpdateParams("user", "name", null);
         });
     }
 }
