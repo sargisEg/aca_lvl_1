@@ -12,7 +12,7 @@ public class SafeList<E> implements List<E> {
     }
 
     @Override
-    public int size() {
+    public synchronized int size() {
         return list.size();
     }
 }

@@ -13,7 +13,7 @@ class RaceConditionGeneratorTest {
         RaceConditionGenerator conditionGenerator = new RaceConditionGenerator((Supplier<Boolean>) ()-> {
             return false;
         });
-        Assertions.assertEquals(10_000, conditionGenerator.start());
+        Assertions.assertNotEquals(10_000, conditionGenerator.start());
     }
 
     @Test
