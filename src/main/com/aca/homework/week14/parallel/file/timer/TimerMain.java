@@ -29,7 +29,11 @@ public class TimerMain {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        try {
+            objectInputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return sec;
     }
 }
