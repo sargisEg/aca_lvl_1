@@ -1,0 +1,9 @@
+Create a commands.txt text document and write all terminal statements in it.
+
+Start the postgres docker container.
+Exec into it.
+Log in as postgres user.
+Create the testDb database.
+Create Students table that has first_name and second_name columns.
+Insert 3 students.
+Select all students.
