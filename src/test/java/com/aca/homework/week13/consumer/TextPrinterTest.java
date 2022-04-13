@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class TextPrinterTest {
 
     private TextPrinter testSubject;
@@ -36,6 +34,8 @@ class TextPrinterTest {
     public void testWhenListContains2Items() {
         testSubject.printAll(List.of("Text1", "Text2"));
         Assertions.assertEquals(2, testPrinterConsumer.getMethodCount());
+        Assertions.assertEquals("Text1", testPrinterConsumer.getValues().get(0));
+        Assertions.assertEquals("Text2", testPrinterConsumer.getValues().get(1));
     }
 
 
