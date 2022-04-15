@@ -1,8 +1,5 @@
 package com.aca.homework.week15.sql.generate;
 
-import com.aca.homework.week13.entity.info.annotations.Column;
-import com.aca.homework.week13.entity.info.annotations.Table;
-
 @Table(name = "users")
 public class User {
 
