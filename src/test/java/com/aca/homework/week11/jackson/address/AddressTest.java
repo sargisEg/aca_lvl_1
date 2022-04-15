@@ -1,6 +1,5 @@
 package com.aca.homework.week11.jackson.address;
 
-import com.aca.homework.week11.address.Address;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
