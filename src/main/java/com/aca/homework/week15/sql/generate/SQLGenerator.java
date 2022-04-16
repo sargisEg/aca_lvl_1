@@ -8,7 +8,7 @@ public class SQLGenerator {
 
     public String generateInsert(User user) {
         Table tableAnnotation = user.getClass().getDeclaredAnnotation(Table.class);
-        if(tableAnnotation != null) {
+        if (tableAnnotation != null) {
 
             StringBuilder insertSQL = new StringBuilder("insert into ");
 
