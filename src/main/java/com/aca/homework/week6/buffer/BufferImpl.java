@@ -2,7 +2,7 @@ package com.aca.homework.week6.buffer;
 
 import java.util.Objects;
 
-public class BufferImpl implements Buffer{
+public class BufferImpl implements Buffer {
 
     private Object myObject;
 

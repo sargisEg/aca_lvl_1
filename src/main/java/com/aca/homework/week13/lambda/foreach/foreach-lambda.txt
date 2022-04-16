@@ -1,0 +1,12 @@
+Create a List of "1", "10", "text", "25" strings, and using foreach method for each item print the value and text length using 2 println methods
+
+e.g
+item value is 1
+item length 1
+item value is 10
+item length is 2
+...
+
+
+use the lambda expression in foreach method
+

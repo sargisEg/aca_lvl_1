@@ -1,0 +1,21 @@
+Create a randomizer class to return 8 sized random string consisting of 'a', 'b', 'c', 'd', 'e'
+
+Create MapValueCountCalculator interface that has the populateAndCalculate(int numberOfRandomStrings) method.
+
+The method should generate random 8 sized random strings and add them in an encapsulated map object.
+ The map should contain (string)-(number of occurrences) pair.
+ The populateAndCalculate method should return
+   max occurred key, occurrence count, min occurred key and occurrence count.
+
+Create 2 implementations of the MapValueCountCalculator interface:
+ LowPerformanceMapValueCountCalculator and HighPerformanceMapValueCountCalculator
+
+Both should encapsulate HashMap<String, Integer>.
+
+In LowPerformanceMapValueCountCalculator encapsulated map should have deault initial capacity and default load factor.
+In HighPerformanceMapValueCountCalculator the mentioned parameters should be tuned.
+
+
+Create a MapValueCountCalculatorTest class (not in test directory) and ask a user to type MapValueCountCalculator
+ instance type ('low' or 'high'), numberOfRandomStrings, made calculations and print the results with processing time.
+

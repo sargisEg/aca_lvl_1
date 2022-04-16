@@ -1,0 +1,14 @@
+Add jackson-annotations.jar library to project (make sure that the jackson-annotations-2.13.0 is added in External Libraries section).
+
+Create an Address class that has the following string annotated fields:
+
+country annotated with JsonProperty("jsonFieldCountry")
+city    annotated with JsonProperty("jsonFieldCity")
+street  annotated with JsonProperty("jsonFieldStreet")
+
+Create AddressTest class with the following unit tests:
+
+testCountryFieldAnnotation() // test that the address test subject's country field is annotated with JsonProperty annotation having a value jsonFieldCountry
+
+testCityFieldAnnotation()
+testStreetFieldAnnotation()
