@@ -1,6 +1,8 @@
 package com.aca.homework.week6.buffer;
 
-public class BufferImpl implements Buffer{
+import java.util.Objects;
+
+public class BufferImpl implements Buffer {
 
     private Object myObject;
 
