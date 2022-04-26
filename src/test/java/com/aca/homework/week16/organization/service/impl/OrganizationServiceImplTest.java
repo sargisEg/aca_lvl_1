@@ -1,5 +1,10 @@
-package com.aca.homework.week16.organization;
+package com.aca.homework.week16.organization.service.impl;
 
+import com.aca.homework.week16.organization.Organization;
+import com.aca.homework.week16.organization.exception.OrganizationNotFoundException;
+import com.aca.homework.week16.organization.repository.OrganizationRepository;
+import com.aca.homework.week16.organization.service.OrganizationService;
+import com.aca.homework.week16.organization.service.impl.OrganizationServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Example;

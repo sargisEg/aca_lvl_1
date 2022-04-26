@@ -1,5 +1,6 @@
-package com.aca.homework.week16.organization;
+package com.aca.homework.week16.organization.create.params;
 
+import com.aca.homework.week16.organization.create.params.OrganizationCreateParams;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

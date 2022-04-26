@@ -11,10 +11,10 @@ public class Organization {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "full_address")
+    @Column(name = "full_address", nullable = false)
     private String fullAddress;
 
     public Organization() {

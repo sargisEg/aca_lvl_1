@@ -1,5 +1,12 @@
-package com.aca.homework.week16.organization;
+package com.aca.homework.week16.organization.service.impl;
 
+import com.aca.homework.week16.organization.Organization;
+import com.aca.homework.week16.organization.OrganizationUsers;
+import com.aca.homework.week16.organization.create.params.OrganizationCreateParams;
+import com.aca.homework.week16.organization.create.params.OrganizationUsersCreateParams;
+import com.aca.homework.week16.organization.exception.OrganizationNotFoundException;
+import com.aca.homework.week16.organization.repository.OrganizationRepository;
+import com.aca.homework.week16.organization.service.OrganizationService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;

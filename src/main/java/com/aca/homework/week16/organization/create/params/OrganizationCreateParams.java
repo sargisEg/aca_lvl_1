@@ -1,4 +1,4 @@
-package com.aca.homework.week16.organization;
+package com.aca.homework.week16.organization.create.params;
 
 import org.springframework.util.Assert;
 
