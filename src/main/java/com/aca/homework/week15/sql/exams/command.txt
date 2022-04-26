@@ -1,0 +1,62 @@
+sargise@ubuntu:~$ sudo docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS      NAMES
+84efb8762b3e   postgres:9.6.12   "docker-entrypoint.s…"   56 seconds ago   Up 49 seconds   5432/tcp   stoic_poitras
+sargise@ubuntu:~$ sudo docker exec -it 84efb8762b3e bash
+root@84efb8762b3e:/# psql -U postgres
+psql (9.6.12)
+Type "help" for help.
+
+postgres=# create database aca;
+CREATE DATABASE
+postgres=# \c aca
+You are now connected to database "aca" as user "postgres".
+aca=# create table EXAMS (id serial primary key, task_name varchar(255) not null unique, task_description varchar(255) not null);
+CREATE TABLE
+aca=# select * from exams
+aca-# ;
+ id | task_name | task_description
+----+-----------+------------------
+(0 rows)
+
+aca=# insert into exams (task_name, task_description) values ('name1', 'description1');
+INSERT 0 1
+aca=# insert into exams (task_name, task_description) values ('name2', 'description2');
+INSERT 0 1
+aca=# insert into exams (task_name, task_description) values ('test task', 'description1');
+INSERT 0 1
+aca=# select * from exams;
+ id | task_name | task_description
+----+-----------+------------------
+  1 | name1     | description1
+  2 | name2     | description2
+  3 | test task | description1
+(3 rows)
+
+aca=# select * from exams where id = 3;
+ id | task_name | task_description
+----+-----------+------------------
+  3 | test task | description1
+(1 row)
+
+aca=# select * from exams where task_name = 'test task';
+ id | task_name | task_description
+----+-----------+------------------
+  3 | test task | description1
+(1 row)
+
+aca=# select count(*) from exams;
+ count
+-------
+     3
+(1 row)
+
+aca=# select task_name from exams;
+ task_name
+-----------
+ name1
+ name2
+ test task
+(3 rows)
+
+aca=#
+

@@ -1,0 +1,14 @@
+Create an ItemWrite interface that has write(T item) method and ItemReader that has read(T item). 
+
+Implement DailyTemperatureFileItemWriter and DailyTemperatureFileItemReader for DailyTemperature class.
+
+DailyTemperature encapsulates 2 fields: dayNumber (can be from 1 to 365) and degree.
+
+The data should be written in daily-temp-data.txt file using ObjectOutputString
+(int and float fields should be written in each line of the file).
+
+Create Main class, randomly create a List of DailyTemperatures for the year, and using item writer write in a file. 
+
+Read the written data using item reader and print using list's foreach method.
+
+There is no need to create a unit test.

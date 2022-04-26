@@ -1,0 +1,68 @@
+sargise@ubuntu:~$ sudo docker run -d postgres:9.6.12
+7de821864547f513d1b08ae2a69cbb0891926377195f7a03d54368ad4ea4dfda
+sargise@ubuntu:~$ sudo docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS      NAMES
+7de821864547   postgres:9.6.12   "docker-entrypoint.s…"   55 seconds ago   Up 51 seconds   5432/tcp   romantic_carver
+sargise@ubuntu:~$ sudo docker exec -it 7de821864547 bash
+root@7de821864547:/# psql -U postgres
+psql (9.6.12)
+Type "help" for help.
+
+postgres=# create database testDb;
+CREATE DATABASE
+postgres=# \d
+No relations found.
+postgres=# \l
+                                 List of databases
+   Name    |  Owner   | Encoding |  Collate   |   Ctype    |   Access privileges
+
+-----------+----------+----------+------------+------------+--------------------
+---
+ postgres  | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+ template0 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres
+  +
+           |          |          |            |            | postgres=CTc/postgr
+es
+ template1 | postgres | UTF8     | en_US.utf8 | en_US.utf8 | =c/postgres
+  +
+           |          |          |            |            | postgres=CTc/postgr
+es
+ testdb    | postgres | UTF8     | en_US.utf8 | en_US.utf8 |
+(4 rows)
+
+testdb=# create table students (first_name varchar(255), second_name varchar(255));
+CREATE TABLE
+testdb=# \d
+          List of relations
+ Schema |   Name   | Type  |  Owner
+--------+----------+-------+----------
+ public | students | table | postgres
+(1 row)
+
+testdb=# \d students
+             Table "public.students"
+   Column    |          Type          | Modifiers
+-------------+------------------------+-----------
+ first_name  | character varying(255) |
+ second_name | character varying(255) |
+
+testdb=# insert into students (first_name, second_name) values (First1, Second1);
+ERROR:  column "first1" does not exist
+LINE 1: ...t into students (first_name, second_name) values (First1, Se...
+                                                             ^
+testdb=# insert into students (first_name, second_name) values ('First1', 'Second1');
+INSERT 0 1
+testdb=# insert into students (first_name, second_name) values ('First2', 'Second2');
+INSERT 0 1
+testdb=# insert into students (first_name, second_name) values ('First3', 'Second3');
+INSERT 0 1
+testdb=# select * from students
+testdb-# ;
+ first_name | second_name
+------------+-------------
+ First1     | Second1
+ First2     | Second2
+ First3     | Second3
+(3 rows)
+
+testdb=#
