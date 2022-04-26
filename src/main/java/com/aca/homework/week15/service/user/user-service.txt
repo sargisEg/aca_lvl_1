@@ -1,0 +1,29 @@
+Create a User class that is annotated with @Table(name = "USERS") annotation and has the following fields:
+
+@Column(name = "username")
+private String username;
+
+@Column(name = "name")
+private String name;
+
+Create a UserRepository class that has a void save(User user) method.
+
+The UserRepository takes a ConnectionFactory in the constructor.
+The save method should get a DB connection from the connection factory, save the provided user in the database,  and close the connection.
+
+Create a UserService and annotate with @Service annotation.
+The UserServices takes a UserRepository in the constructor and has 
+User create(UserCreateParams params) method.
+
+The create method should create a new User object and save it using the repository save method.
+
+The UserCreateParams has the following fields:
+
+String username and String name. Both should not be null.
+
+Create an slf4j logger in UserService class and print the log at the beginning of the create() and the end of the create() method. 
+
+// LOGGER.debug Creating a user for the provided creation params - $params 
+// LOGGER.debug  Successfully created a user for the provided creation params - $params, result - $user
+
+Create tests for all components

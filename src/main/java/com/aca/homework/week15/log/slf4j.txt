@@ -1,0 +1,25 @@
+Add the following dependencies in build.gradle file
+
+    implementation group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    implementation group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+
+Create a simplelogger.properties file in src/main/resources directory with the content below:
+
+
+org.slf4j.simpleLogger.defaultLogLevel=debug
+
+
+Create a LoggerMain class and declare 
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoggerMain.class);
+
+The Logger and LoggerFactory should be imported from org.slf4j package.
+
+In the main method write 
+
+    LOGGER.debug("Hello SLF4J!");
+
+Run the main method and be sure that the text below is printed:
+
+[main] DEBUG ${your package name}.LoggerMain - Hello SLF4J
+

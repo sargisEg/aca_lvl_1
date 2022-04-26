@@ -1,0 +1,12 @@
+Create a StopWatch class that takes a DisplayType as an argument and has a start method.
+
+There are 2 type of DisplayTypes: SECONDS_AND_MILLIS and SECONDS
+
+When the SECONDS_AND_MILLIS format is chosen, the StopWatch should print the elapsed time in this format: XX.yyy, where XX is seconds and yyy is milliseconds.
+
+The format in the case of SECONDS is: XX
+
+For both SECONDS_AND_MILLIS and SECONDS update rate should be ~10ms
+
+
+Unit tests should be written for some methods.
