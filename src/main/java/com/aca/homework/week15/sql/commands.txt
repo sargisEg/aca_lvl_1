@@ -1,8 +1,6 @@
 aca=# create table companies (id serial primary key, company_name varchar(255) not null, company_price int not null, company_creation_date varchar(255) not null);
 CREATE TABLE
-aca=# create table users (id serial primary key, username varchar(255) not null, first_name varchar(255) not null, last_name varchar(255) not null);
-CREATE TABLE
-aca=# create table companies_users (company_id int not null, user_id int unique not null, user_reg_date varchar(255) not null);
+aca=# create table users (id serial primary key, username varchar(255) not null, first_name varchar(255) not null, last_name varchar(255) not null, company_id int not null);
 CREATE TABLE
 aca=# select * from companies;
  id | company_name | company_price | company_creation_date
@@ -10,71 +8,47 @@ aca=# select * from companies;
 (0 rows)
 
 aca=# select * from users;
- id | username | first_name | last_name
-----+----------+------------+-----------
+ id | username | first_name | last_name | company_id
+----+----------+------------+-----------+------------
 (0 rows)
-
-aca=# select * from companies_;
-companies_id_seq  companies_users
-aca=# select * from companies_users;
- company_id | user_id | user_reg_date
-------------+---------+---------------
-(0 rows)
-
-aca=# alter table companies_users  add constraint fk_companies_users_company_id foreign key (company_id) references companies (id);
+aca=# alter table users add constraint fk_users_companies_id foreign key (company_id) references companies (id);
 ALTER TABLE
-aca=# alter table companies_users  add constraint fk_companies_users_user_id foreign key (user_id) references users (id);
-ALTER TABLE
-aca=# \d companies_users
-           Table "public.companies_users"
-    Column     |          Type          | Modifiers
----------------+------------------------+-----------
- company_id    | integer                | not null
- user_id       | integer                | not null
- user_reg_date | character varying(255) | not null
+aca=# \d users
+                                   Table "public.users"
+   Column   |          Type          |                     Modifiers
+
+------------+------------------------+------------------------------------------
+----------
+ id         | integer                | not null default nextval('users_id_seq'::regclass)
+ username   | character varying(255) | not null
+ first_name | character varying(255) | not null
+ last_name  | character varying(255) | not null
+ company_id | integer                | not null
+
 Indexes:
-    "companies_users_user_id_key" UNIQUE CONSTRAINT, btree (user_id)
+    "users_pkey" PRIMARY KEY, btree (id)
 Foreign-key constraints:
-    "fk_companies_users_company_id" FOREIGN KEY (company_id) REFERENCES companies(id)
-    "fk_companies_users_user_id" FOREIGN KEY (user_id) REFERENCES users(id)
-
-aca=#
-aca=# select * from companies_;
-companies_id_seq  companies_users
-aca=# select * from companies_users;
- company_id | user_id | user_reg_date
-------------+---------+---------------
-(0 rows)
+    "fk_users_companies_id" FOREIGN KEY (company_id) REFERENCES companies(id)
 
 aca=# select * from companies
 aca-# ;
  id | company_name | company_price | company_creation_date
 ----+--------------+---------------+-----------------------
 (0 rows)
-
-aca=# insert into companies (company_name, company_price, company_creation_date) values ('superAI' 20000, '12.12.12');
-ERROR:  syntax error at or near "20000"
-LINE 1: ...ce, company_creation_date) values ('superAI' 20000, '12...
-                                                             ^
+                                                     ^
 aca=# insert into companies (company_name, company_price, company_creation_date) values ('superAI', 20000, '12.12.12');
 INSERT 0 1
 aca=# insert into companies (company_name, company_price, company_creation_date) values ('marketAC', 123456, '05.07.20');
 INSERT 0 1
-aca=# select * from users
-aca-# ;
- id | username | first_name | last_name
-----+----------+------------+-----------
-(0 rows)
-
-aca=# insert into users (username, first_name, last_name) values ('uuser123', 'Jane', 'Smith');
+aca=# insert into users (username, first_name, last_name, company_id) values ('uuser123', 'Jane', 'Smith', 1);
 INSERT 0 1
-aca=# insert into users (username, first_name, last_name) values ('jack789', 'Jack', 'Lee');
+aca=# insert into users (username, first_name, last_name, company_id) values ('jack789', 'Jack', 'Lee', 1);
 INSERT 0 1
-aca=# insert into users (username, first_name, last_name) values ('jjones', 'John', 'Jones');
+aca=# insert into users (username, first_name, last_name, company_id) values ('jjones', 'John', 'Jones', 1);
 INSERT 0 1
-aca=# insert into users (username, first_name, last_name) values ('kim_official', 'Kim', 'Kardashian');
+aca=# insert into users (username, first_name, last_name, company_id) values ('kim_official', 'Kim', 'Kardashian', 2);
 INSERT 0 1
-aca=# insert into users (username, first_name, last_name) values ('i0am0paul', 'Paul', 'Hart');
+aca=#  insert into users (username, first_name, last_name, company_id) values ('i0am0paul', 'Paul', 'Hart', 2);
 INSERT 0 1
 aca=# select * from companies;
  id | company_name | company_price | company_creation_date
@@ -83,39 +57,14 @@ aca=# select * from companies;
   2 | marketAC     |        123456 | 05.07.20
 (2 rows)
 
-aca=# select * from companies_users ;
- company_id | user_id | user_reg_date
-------------+---------+---------------
-(0 rows)
-
 aca=# select * from users;
- id |   username   | first_name | last_name
-----+--------------+------------+------------
-  1 | uuser123     | Jane       | Smith
-  2 | jack789      | Jack       | Lee
-  3 | jjones       | John       | Jones
-  4 | kim_official | Kim        | Kardashian
-  5 | i0am0paul    | Paul       | Hart
-(5 rows)
-
-aca=# insert into companies_users (company_id, user_id, user_reg_date) values (1, 1, '01.01.18');
-INSERT 0 1
-aca=# insert into companies_users (company_id, user_id, user_reg_date) values (1, 2, '21.10.18');
-INSERT 0 1
-aca=# insert into companies_users (company_id, user_id, user_reg_date) values (1, 3, '30.05.21');
-INSERT 0 1
-aca=# insert into companies_users (company_id, user_id, user_reg_date) values (2, 4, '30.11.21');
-INSERT 0 1
-aca=# insert into companies_users (company_id, user_id, user_reg_date) values (2, 5, '19.12.20');
-INSERT 0 1
-aca=# select * from companies_users ;
- company_id | user_id | user_reg_date
-------------+---------+---------------
-          1 |       1 | 01.01.18
-          1 |       2 | 21.10.18
-          1 |       3 | 30.05.21
-          2 |       4 | 30.11.21
-          2 |       5 | 19.12.20
+ id |   username   | first_name | last_name  | company_id
+----+--------------+------------+------------+------------
+  1 | uuser123     | Jane       | Smith      |          1
+  2 | jack789      | Jack       | Lee        |          1
+  3 | jjones       | John       | Jones      |          1
+  4 | kim_official | Kim        | Kardashian |          2
+  5 | i0am0paul    | Paul       | Hart       |          2
 (5 rows)
 
 aca=# select company_name from companies;
@@ -141,21 +90,17 @@ aca=# select first_name from users;
  Paul
 (5 rows)
 
-aca=# select c.company_name, u.first_name, u.last_name from companies_users c_u inner join users u on c_u.user_id = u.id inner join companies c on c_u.company_id = c.id;
+aca=# select c.company_name, u.first_name, u.last_name from companies c inner join users u on u.company_id = c.id;
  company_name | first_name | last_name
 --------------+------------+------------
- superAI      | Jane       | Smith
- superAI      | Jack       | Lee
  superAI      | John       | Jones
- marketAC     | Kim        | Kardashian
+ superAI      | Jack       | Lee
+ superAI      | Jane       | Smith
  marketAC     | Paul       | Hart
+ marketAC     | Kim        | Kardashian
 (5 rows)
-
-aca=# select u.username, u.first_name, u.last_name from companies_users c_u inner join users u on c_u.user_id = u.id inner join companies c on c_u.company_id = c.id where c.company_name = superAI;
-ERROR:  column "superai" does not exist
-LINE 1: ...s c on c_u.company_id = c.id where c.company_name = superAI;
-                                                               ^
-aca=# select u.username, u.first_name, u.last_name from companies_users c_u inner join users u on c_u.user_id = u.id inner join companies c on c_u.company_id = c.id where c.company_name = 'superAI';
+                                                    ^
+aca=# select u.username, u.first_name, u.last_name from users u inner join companies c on c.id = u.company_id where c.company_name = 'superAI';
  username | first_name | last_name
 ----------+------------+-----------
  uuser123 | Jane       | Smith
