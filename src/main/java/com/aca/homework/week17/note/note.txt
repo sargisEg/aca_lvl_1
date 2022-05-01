@@ -1,0 +1,19 @@
+The user is able to sign-up and create notes.
+
+Create a User and Note entities, UserRepository and NoteRepository, UserCreationParams and NoteCreationParams parameter objects, UserService and NoteService services.
+
+Create a UserFacade that has UserSignUpResponseDto signUp(UserSignUpRequestDto dto) method.
+
+Create a NoteFacade that has NoteCreationResponseDto create(NoteCreationRequestDto dto) method.
+
+The user has username, first name, second name, ... fields.
+The note has text, ... fields.
+
+UserSignUpRequestDto should contain username, first name, second name fields only.
+
+UserSignUpResponseDto should contain username only.
+
+NoteCreationRequestDto should contain username, note text.
+NoteCreationResponseDto should contain username, note text and note creation date.
+
+There is no need to create tests.
