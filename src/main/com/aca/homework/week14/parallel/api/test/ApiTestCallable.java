@@ -15,7 +15,7 @@ public class ApiTestCallable implements Callable<String> {
 
     @Override
     public String call() throws Exception {
-        String result;
+        final String result;
         Thread.sleep(2000);
         if (new Random().nextInt(2) == 0) {
             result = "Passed";
