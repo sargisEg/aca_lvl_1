@@ -1,6 +1,10 @@
 package com.aca.homework.week17.note.facade.user;
 
-public class UserSignUpRequestDto {
+import org.springframework.util.Assert;
+
+import java.util.Objects;
+
+public final class UserSignUpRequestDto {
 
     private final String username;
 
@@ -9,6 +13,9 @@ public class UserSignUpRequestDto {
     private final String secondName;
 
     public UserSignUpRequestDto(String username, String firstName, String secondName) {
+        Assert.hasText(username, "Username should not be null or empty");
+        Assert.hasText(firstName, "First name should not be null or empty");
+        Assert.hasText(secondName, "Second name should not be null or empty");
         this.username = username;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -34,5 +41,18 @@ public class UserSignUpRequestDto {
         sb.append(", secondName='").append(secondName).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserSignUpRequestDto)) return false;
+        UserSignUpRequestDto that = (UserSignUpRequestDto) o;
+        return Objects.equals(username, that.username) && Objects.equals(firstName, that.firstName) && Objects.equals(secondName, that.secondName);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, firstName, secondName);
     }
 }

@@ -8,16 +8,16 @@ public class CreateNoteParams {
 
     private final String text;
 
-    private final Long user_id;
+    private final Long userId;
 
     private final LocalDate creationDate;
 
-    public CreateNoteParams(String text, Long user_id, LocalDate creationDate) {
+    public CreateNoteParams(String text, Long userId, LocalDate creationDate) {
         Assert.hasText(text, "Text should not be null or empty");
-        Assert.notNull(user_id, "User id should not be null");
+        Assert.notNull(userId, "User id should not be null");
         Assert.notNull(creationDate, "Creation date should not be null");
         this.text = text;
-        this.user_id = user_id;
+        this.userId = userId;
         this.creationDate = creationDate;
     }
 
@@ -25,8 +25,8 @@ public class CreateNoteParams {
         return text;
     }
 
-    public Long getUser_id() {
-        return user_id;
+    public Long getUserId() {
+        return userId;
     }
 
     public LocalDate getCreationDate() {
@@ -37,7 +37,7 @@ public class CreateNoteParams {
     public String toString() {
         final StringBuilder sb = new StringBuilder("CreateNoteParams{");
         sb.append("text='").append(text).append('\'');
-        sb.append(", user_id=").append(user_id);
+        sb.append(", user_id=").append(userId);
         sb.append(", creationDate=").append(creationDate);
         sb.append('}');
         return sb.toString();

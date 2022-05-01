@@ -4,7 +4,6 @@ import com.aca.homework.week17.note.entity.User;
 import com.aca.homework.week17.note.facade.note.NoteFacadeImpl;
 import com.aca.homework.week17.note.service.core.CreateUserParams;
 import com.aca.homework.week17.note.service.core.UserService;
-import com.aca.homework.week17.note.service.impl.UserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -22,10 +21,9 @@ public class UserFacadeImpl implements UserFacade {
     @Override
     public UserSignUpResponseDto signUp(UserSignUpRequestDto dto) {
         Assert.notNull(dto, "Request should not be null");
-        LOGGER.info("Sign up user for request - {}", dto);
+        LOGGER.info("Sign up user for the request - {}", dto);
 
-        final User user = userService.create(
-                new CreateUserParams(
+        final User user = userService.create(new CreateUserParams(
                         dto.getUsername(),
                         dto.getFirstName(),
                         dto.getSecondName()
@@ -34,7 +32,7 @@ public class UserFacadeImpl implements UserFacade {
 
         final UserSignUpResponseDto responseDto = new UserSignUpResponseDto(user.getUsername());
 
-        LOGGER.info("Successfully signed up user for request - {}, response - {}", dto, responseDto);
+        LOGGER.info("Successfully signed up user for the request - {}, response - {}", dto, responseDto);
         return responseDto;
     }
 }

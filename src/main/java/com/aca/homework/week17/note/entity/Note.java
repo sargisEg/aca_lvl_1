@@ -12,11 +12,15 @@ public class Note {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "text")
+    @Column(name = "text", nullable = false)
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_NOTES_USER_ID_ID"))
+    @JoinColumn(
+            name = "user_id",
+            foreignKey = @ForeignKey(name = "FK_NOTES_USER_ID_ID"),
+            nullable = false
+    )
     private User user;
 
     @Column(name = "creation_date", nullable = false)

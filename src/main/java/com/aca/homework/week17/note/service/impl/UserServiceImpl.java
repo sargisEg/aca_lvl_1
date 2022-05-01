@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User create(CreateUserParams params) {
-        Assert.notNull(params, "Params should not be null");
+        Assert.notNull(params, "User creation params should not be null");
         LOGGER.info("Creating a User with params - {}", params);
 
         final User userFromParams = new User(
@@ -42,13 +42,10 @@ public class UserServiceImpl implements UserService {
         Assert.notNull(id, "Id should not be null");
         LOGGER.info("Getting User with id - {}", id);
 
-        final Optional<User> optionalUser = userRepository.findById(id);
-
-        if (optionalUser.isEmpty()) {
-            throw new UserNotFoundException(id);
-        }
-
-        final User user = optionalUser.get();
+        final User user = userRepository.findById(id)
+                .orElseThrow(() -> {
+                    throw new UserNotFoundException(id);
+                });
 
         LOGGER.info("Successfully got User with id - {}, result - {}", id, user);
         return user;
@@ -59,14 +56,12 @@ public class UserServiceImpl implements UserService {
         Assert.hasText(username, "Username should not be null or empty");
         LOGGER.info("Getting User with username - {}", username);
 
-        final Optional<User> optionalUser = userRepository.findByUsername(username);
-
-        if (optionalUser.isEmpty()) {
-            throw new UserNotFoundException(username);
-        }
-
-        final User user = optionalUser.get();
+        final User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> {
+                    throw new UserNotFoundException(username);
+                });
 
         LOGGER.info("Successfully got User with username - {}, result - {}", username, user);
-        return user;}
+        return user;
+    }
 }

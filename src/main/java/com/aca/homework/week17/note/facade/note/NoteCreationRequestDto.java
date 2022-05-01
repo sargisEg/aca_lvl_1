@@ -1,12 +1,18 @@
 package com.aca.homework.week17.note.facade.note;
 
-public class NoteCreationRequestDto {
+import org.springframework.util.Assert;
+
+import java.util.Objects;
+
+public final class NoteCreationRequestDto {
 
     private final String username;
 
     private final String text;
 
     public NoteCreationRequestDto(String username, String text) {
+        Assert.hasText(username, "Username should not be null or empty");
+        Assert.hasText(text, "Text should not be null or empty");
         this.username = username;
         this.text = text;
     }
@@ -26,5 +32,18 @@ public class NoteCreationRequestDto {
         sb.append(", text='").append(text).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof NoteCreationRequestDto)) return false;
+        NoteCreationRequestDto that = (NoteCreationRequestDto) o;
+        return Objects.equals(username, that.username) && Objects.equals(text, that.text);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, text);
     }
 }
