@@ -80,21 +80,19 @@ public class Main {
     }
 
     private static void generatePlateNumbersAndSave(NumberPlateService numberPlateService, String letters) {
-//        String[] letters = {"AA", "AB", "AC", "BA", "BB", "BC", "CA", "CB", "CC"};
         StringBuilder result;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 1000; j++) {
-                result = new StringBuilder(letters);
-                if (j / 10 == 0) {
-                    result.append(" 00").append(j);
-                } else if (j / 100 == 0) {
-                    result.append(" 0").append(j);
-                } else {
-                    result.append(" ").append(j);
-                }
-
-                numberPlateService.create(new CreateNumberPlateParams(result.toString()));
+        for (int j = 0; j < 1000; j++) {
+            result = new StringBuilder(letters);
+            if (j / 10 == 0) {
+                result.append(" 00").append(j);
+            } else if (j / 100 == 0) {
+                result.append(" 0").append(j);
+            } else {
+                result.append(" ").append(j);
             }
+
+            numberPlateService.create(new CreateNumberPlateParams(result.toString()));
         }
+
     }
 }
