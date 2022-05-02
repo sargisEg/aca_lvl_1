@@ -1,0 +1,21 @@
+There are printed motorcycle plate numbers. A user having a passport can easily take a plate number if it is free, also he/she can see all plate numbers that belong to him/her.
+
+The number format is:
+
+XX YYY
+
+where XX can be any combination of A, B, and C letters, and YY can be any combination of 0 to 9 numbers.
+
+an example of a plate number is: 'AC 748'
+
+Create a NumberPlateService and using a create method in the Main class create numbers with all possible combinations. (use multithreading best practices to create numbers)
+
+A user that has a passport id, first name, and second name can own 0 or more plate numbers.
+
+Create User and UserPlateNumber entities, UserService and UserPlateNumberService services.
+
+Create UserPlateNumberFacade that has the ability to take a plate number if it is free, able to see all numbers that the user has.
+
+There is no need to create tests.
+
+
