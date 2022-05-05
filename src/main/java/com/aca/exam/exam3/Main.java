@@ -3,10 +3,7 @@ package com.aca.exam.exam3;
 import com.aca.exam.exam3.entity.NumberPlate;
 import com.aca.exam.exam3.entity.User;
 import com.aca.exam.exam3.entity.UserPlateNumber;
-import com.aca.exam.exam3.facade.GetAllUserNumbersRequestDto;
-import com.aca.exam.exam3.facade.UserPlateNumberFacade;
-import com.aca.exam.exam3.facade.UserPlateNumberFacadeImpl;
-import com.aca.exam.exam3.facade.UserTakePlateNumberRequestDto;
+import com.aca.exam.exam3.facade.*;
 import com.aca.exam.exam3.repository.NumberPlateRepository;
 import com.aca.exam.exam3.repository.UserPlateNumberRepository;
 import com.aca.exam.exam3.repository.UserRepository;
@@ -24,9 +21,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @SpringBootApplication
 @EnableJpaRepositories
@@ -52,13 +52,13 @@ public class Main {
                 userPlateNumberService
         );
 
-        final User user = userService.create(new CreateUserParams(123456L, "first", "Second"));
-        final User user1 = userService.create(new CreateUserParams(654321L, "first4", "Second2"));
+        final User user = userService.create(new CreateUserParams("123456L", "first", "Second"));
+        final User user1 = userService.create(new CreateUserParams("654321L", "first4", "Second2"));
 
-        final NumberPlate numberPlate = numberPlateService.create(new CreateNumberPlateParams("AC 123"));
-        final NumberPlate numberPlate1 = numberPlateService.create(new CreateNumberPlateParams("AC 346"));
-        final NumberPlate numberPlate2 = numberPlateService.create(new CreateNumberPlateParams("AC 951"));
-        final NumberPlate numberPlate3 = numberPlateService.create(new CreateNumberPlateParams("AC 564"));
+//        final NumberPlate numberPlate = numberPlateService.create(new CreateNumberPlateParams("AC 123"));
+//        final NumberPlate numberPlate1 = numberPlateService.create(new CreateNumberPlateParams("AC 346"));
+//        final NumberPlate numberPlate2 = numberPlateService.create(new CreateNumberPlateParams("AC 951"));
+//        final NumberPlate numberPlate3 = numberPlateService.create(new CreateNumberPlateParams("AC 564"));
 //
 //        userPlateNumberFacade.takePlateNumber(new UserTakePlateNumberRequestDto(user.getPassportId(), numberPlate.getPlateNumber()));
 //        userPlateNumberFacade.takePlateNumber(new UserTakePlateNumberRequestDto(user.getPassportId(), numberPlate2.getPlateNumber()));
@@ -67,9 +67,8 @@ public class Main {
 //
 //        userPlateNumberFacade.getAllUserNumbers(new GetAllUserNumbersRequestDto(user1.getPassportId()));
 
-        ExecutorService executorService = Executors.newFixedThreadPool(16);
+        ExecutorService executorService = Executors.newCachedThreadPool();
         String[] letters = {"AA", "AB", "AC", "BA", "BB", "BC", "CA", "CB", "CC"};
-        // TODO: 02/05/2022 Can be faster
         for (int i = 0; i < 9; i++) {
             int finalI = i;
             executorService.submit(() -> {
@@ -77,6 +76,36 @@ public class Main {
             });
         }
         executorService.shutdown();
+
+        userPlateNumberFacade.takePlateNumber(
+                new UserTakePlateNumberRequestDto(
+                        "123456L",
+                        "AA 586"
+                )
+        );
+
+        userPlateNumberFacade.takePlateNumber(
+                new UserTakePlateNumberRequestDto(
+                        "123456L",
+                        "CC 000"
+                )
+        );
+
+        userPlateNumberFacade.takePlateNumber(
+                new UserTakePlateNumberRequestDto(
+                        "654321L",
+                        "BC 586"
+                )
+        );
+
+        final GetAllUserNumbersResponseDto allUserNumbers = userPlateNumberFacade.getAllUserNumbers(
+                new GetAllUserNumbersRequestDto(
+                        "123456L"
+                )
+        );
+
+        System.err.println(allUserNumbers);
+
     }
 
     private static void generatePlateNumbersAndSave(NumberPlateService numberPlateService, String letters) {

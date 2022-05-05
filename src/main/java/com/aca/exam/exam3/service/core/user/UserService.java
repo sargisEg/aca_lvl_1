@@ -10,5 +10,5 @@ public interface UserService {
 
     User getById(Long id);
 
-    User getByPassportId(Long passportId);
+    User getByPassportId(String passportId);
 }

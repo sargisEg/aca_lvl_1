@@ -3,6 +3,7 @@ package com.aca.exam.exam3.entity;
 import javax.persistence.*;
 import java.util.Objects;
 
+
 @Entity
 @Table(name = "USERS")
 public class User {
@@ -12,18 +13,18 @@ public class User {
     private Long id;
 
     @Column(name = "passport_id", nullable = false, unique = true)
-    private Long passportId;
+    private String passportId;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name", nullable = false, length = 25)
     private String firstName;
 
-    @Column(name = "second_name", nullable = false)
+    @Column(name = "second_name", nullable = false, length = 25)
     private String secondName;
 
     public User() {
     }
 
-    public User(Long passportId, String firstName, String secondName) {
+    public User(String passportId, String firstName, String secondName) {
         this.passportId = passportId;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -37,11 +38,11 @@ public class User {
         this.id = id;
     }
 
-    public Long getPassportId() {
+    public String getPassportId() {
         return passportId;
     }
 
-    public void setPassportId(Long passportId) {
+    public void setPassportId(String passportId) {
         this.passportId = passportId;
     }
 

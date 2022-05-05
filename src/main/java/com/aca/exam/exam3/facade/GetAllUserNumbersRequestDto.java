@@ -4,13 +4,13 @@ import java.util.Objects;
 
 public final class GetAllUserNumbersRequestDto {
 
-    private final Long passportId;
+    private final String passportId;
 
-    public GetAllUserNumbersRequestDto(Long passportId) {
+    public GetAllUserNumbersRequestDto(String passportId) {
         this.passportId = passportId;
     }
 
-    public Long getPassportId() {
+    public String getPassportId() {
         return passportId;
     }
 

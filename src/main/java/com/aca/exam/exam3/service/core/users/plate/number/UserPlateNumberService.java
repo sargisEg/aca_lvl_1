@@ -6,6 +6,7 @@ import com.aca.exam.exam3.entity.UserPlateNumber;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface UserPlateNumberService {
@@ -15,4 +16,6 @@ public interface UserPlateNumberService {
     List<UserPlateNumber> getByUserId(Long id);
 
     UserPlateNumber getByNumberPlateId(Long id);
+
+    Optional<UserPlateNumber> findByNumberPlateId(Long id);
 }

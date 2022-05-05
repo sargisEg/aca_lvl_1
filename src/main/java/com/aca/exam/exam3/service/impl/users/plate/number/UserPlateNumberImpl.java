@@ -55,7 +55,8 @@ public class UserPlateNumberImpl implements UserPlateNumberService {
         Assert.notNull(id, "User id should not be null");
         LOGGER.info("Getting User plate numbers for user with id - {}", id);
 
-        final List<UserPlateNumber> userPlateNumberList = userPlateNumberRepository.findByUser(userService.getById(id));
+        final List<UserPlateNumber> userPlateNumberList = userPlateNumberRepository
+                .findByUserId(id);
 
         LOGGER.info("Successfully got User plate numbers for user with id - {}, result - {}", id, userPlateNumberList);
         return userPlateNumberList;
@@ -66,15 +67,32 @@ public class UserPlateNumberImpl implements UserPlateNumberService {
         Assert.notNull(id, "Number plate id should not be null");
         LOGGER.info("Getting User plate numbers with number plate id - {}", id);
 
-        final Optional<UserPlateNumber> numberPlate = userPlateNumberRepository.findByNumberPlate(numberPlateService.getById(id));
+        final Optional<UserPlateNumber> numberPlate = userPlateNumberRepository
+                .findByNumberPlateId(id);
 
         if (numberPlate.isEmpty()) {
-            return null;
+            throw new UserPlateNumberNotFoundException(id);
         }
 
         final UserPlateNumber userPlateNumber = numberPlate.get();
 
         LOGGER.info("Successfully got User plate number with number plate  id - {}, result - {}", id, userPlateNumber);
         return userPlateNumber;
+    }
+
+    @Override
+    public Optional<UserPlateNumber> findByNumberPlateId(Long id) {
+        Assert.notNull(id, "Number plate id should not be null");
+        LOGGER.info("Getting User plate numbers with number plate id - {}", id);
+
+        final Optional<UserPlateNumber> optionalUserPlateNumber = userPlateNumberRepository
+                .findByNumberPlateId(id);
+
+        LOGGER.info(
+                "Successfully got User plate number with number plate  id - {}, result - {}",
+                id,
+                optionalUserPlateNumber
+        );
+        return optionalUserPlateNumber;
     }
 }

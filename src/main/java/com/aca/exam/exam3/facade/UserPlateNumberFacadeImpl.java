@@ -3,16 +3,18 @@ package com.aca.exam.exam3.facade;
 import com.aca.exam.exam3.entity.NumberPlate;
 import com.aca.exam.exam3.entity.User;
 import com.aca.exam.exam3.entity.UserPlateNumber;
-import com.aca.exam.exam3.service.core.number.plate.CreateNumberPlateParams;
 import com.aca.exam.exam3.service.core.number.plate.NumberPlateService;
 import com.aca.exam.exam3.service.core.user.UserService;
 import com.aca.exam.exam3.service.core.users.plate.number.CreateUserPlateNumberParams;
 import com.aca.exam.exam3.service.core.users.plate.number.UserPlateNumberService;
+import com.aca.exam.exam3.service.impl.user.UserNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class UserPlateNumberFacadeImpl implements UserPlateNumberFacade {
 
@@ -33,26 +35,37 @@ public class UserPlateNumberFacadeImpl implements UserPlateNumberFacade {
 
     @Override
     public UserTakePlateNumberResponseDto takePlateNumber(UserTakePlateNumberRequestDto dto) {
+        Assert.notNull(dto, "Take plate number request should not be null");
+        LOGGER.info("Taking plate number for provided request - {}", dto);
 
         final NumberPlate plateNumber = numberPlateService.getByPlateNumber(dto.getPlateNumber());
 
-        final UserPlateNumber userPlateNumber = userPlateNumberService.getByNumberPlateId(plateNumber.getId());
+        final Optional<UserPlateNumber> optionalUserPlateNumber = userPlateNumberService
+                .findByNumberPlateId(plateNumber.getId());
 
-        if (userPlateNumber != null) {
+        if (optionalUserPlateNumber.isPresent()) {
             throw new NumberTakenException(plateNumber.getPlateNumber());
         }
 
-        final User user = userService.getByPassportId(dto.getPassword_id());
+        final User user = userService.getByPassportId(dto.getPassportId());
 
         userPlateNumberService.create(
                 new CreateUserPlateNumberParams(user.getId(), plateNumber.getId())
         );
 
-        return new UserTakePlateNumberResponseDto(plateNumber.getPlateNumber());
+        final UserTakePlateNumberResponseDto responseDto =
+                new UserTakePlateNumberResponseDto(
+                        plateNumber.getPlateNumber(),
+                        user.getPassportId()
+                );
+        LOGGER.info("Successfully took plate number for provided request - {}, response - {}", dto, responseDto);
+        return responseDto;
     }
 
     @Override
     public GetAllUserNumbersResponseDto getAllUserNumbers(GetAllUserNumbersRequestDto dto) {
+        Assert.notNull(dto, "Get users all plate numbers request should not be null");
+        LOGGER.info("Getting all plate numbers for provided request - {}", dto);
 
         final User userByPassportId = userService.getByPassportId(dto.getPassportId());
 
@@ -64,6 +77,8 @@ public class UserPlateNumberFacadeImpl implements UserPlateNumberFacade {
             plateNumbers.add(userPlateNumber.getNumberPlate());
         });
 
-        return new GetAllUserNumbersResponseDto(plateNumbers);
+        final GetAllUserNumbersResponseDto responseDto = new GetAllUserNumbersResponseDto(plateNumbers);
+        LOGGER.info("Successfully got all plate numbers for provided request - {}, response - {}", dto, responseDto);
+        return responseDto;
     }
 }

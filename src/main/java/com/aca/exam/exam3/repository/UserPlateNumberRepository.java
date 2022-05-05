@@ -14,5 +14,9 @@ public interface UserPlateNumberRepository extends JpaRepository<UserPlateNumber
 
     List<UserPlateNumber> findByUser(User user);
 
+    List<UserPlateNumber> findByUserId(Long id);
+
     Optional<UserPlateNumber> findByNumberPlate(NumberPlate numberPlate);
+
+    Optional<UserPlateNumber> findByNumberPlateId(Long id);
 }

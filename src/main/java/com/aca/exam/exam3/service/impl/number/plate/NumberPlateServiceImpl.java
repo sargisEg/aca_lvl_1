@@ -20,7 +20,7 @@ public class NumberPlateServiceImpl implements NumberPlateService {
     }
 
     @Override
-    public synchronized NumberPlate create(CreateNumberPlateParams params) {
+    public NumberPlate create(CreateNumberPlateParams params) {
         Assert.notNull(params, "Number plate creation params should not be null");
         LOGGER.info("Creating plate number with providing params - {}", params);
 

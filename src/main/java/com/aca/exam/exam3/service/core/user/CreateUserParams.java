@@ -6,13 +6,13 @@ import java.util.Objects;
 
 public class CreateUserParams {
 
-    private final Long passportId;
+    private final String passportId;
 
     private final String firstName;
 
     private final String secondName;
 
-    public CreateUserParams(Long passportId, String firstName, String secondName) {
+    public CreateUserParams(String passportId, String firstName, String secondName) {
         Assert.notNull(passportId, "The passport id should not be null");
         Assert.hasText(firstName, "First name should not be null or empty");
         Assert.hasText(secondName, "Second name should not be null or empty");
@@ -21,7 +21,7 @@ public class CreateUserParams {
         this.secondName = secondName;
     }
 
-    public Long getPassportId() {
+    public String getPassportId() {
         return passportId;
     }
 

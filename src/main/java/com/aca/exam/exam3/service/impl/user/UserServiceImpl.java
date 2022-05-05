@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByPassportId(Long passportId) {
-        Assert.notNull(passportId, "User passport id should not be null");
+    public User getByPassportId(String passportId) {
+        Assert.hasText(passportId, "User passport id should not be null or empty");
         LOGGER.info("Getting user with passport id - {}", passportId);
 
         final User user = userRepository.findByPassportId(passportId)
