@@ -1,10 +1,13 @@
 package com.aca.homework.week18.website.facade.post;
 
+import com.aca.homework.week18.website.facade.post.image.ImageDto;
+import com.aca.homework.week18.website.facade.post.image.UploadPostImageRequestDto;
+
 public interface PostFacade {
 
-    PostCreateResponseDto create(PostCreateRequestDto dto);
+    PostDto create(PostCreateRequestDto dto);
 
-    UploadImageResponseDto uploadImage(UploadImageRequest dto);
+    ImageDto uploadPostImage(UploadPostImageRequestDto dto);
 
-    GetAllUserPostsResponseDto getAllUserPosts(GetAllUserPostsRequestDto dto);
+    GetAllUserPostsResponseDto getAllUserPosts(String username);
 }

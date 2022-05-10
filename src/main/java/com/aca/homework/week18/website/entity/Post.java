@@ -23,18 +23,13 @@ public class Post {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "images", nullable = false)
-    private List<Image> images;
-
     public Post() {
     }
 
-    public Post(String title, String description, User user, List<Image> images) {
+    public Post(String title, String description, User user) {
         this.title = title;
         this.description = description;
         this.user = user;
-        this.images = images;
     }
 
     @Override
@@ -44,7 +39,6 @@ public class Post {
         sb.append(", title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", user=").append(user);
-        sb.append(", images=").append(Objects.toString(images));
         sb.append('}');
         return sb.toString();
     }
@@ -54,12 +48,15 @@ public class Post {
         if (this == o) return true;
         if (!(o instanceof Post)) return false;
         Post post = (Post) o;
-        return Objects.equals(id, post.id) && Objects.equals(title, post.title) && Objects.equals(description, post.description) && Objects.equals(user, post.user) && Objects.equals(images, post.images);
+        return Objects.equals(id, post.id)
+                && Objects.equals(title, post.title)
+                && Objects.equals(description, post.description)
+                && Objects.equals(user, post.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description, user, images);
+        return Objects.hash(id, title, description, user);
     }
 
     public Long getId() {
@@ -92,14 +89,6 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
     }
 
 }

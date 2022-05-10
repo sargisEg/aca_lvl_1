@@ -3,9 +3,9 @@ package com.aca.homework.week18.website;
 import com.aca.homework.week18.website.entity.Image;
 import com.aca.homework.week18.website.entity.User;
 import com.aca.homework.week18.website.facade.post.*;
-import com.aca.homework.week18.website.facade.user.UserFacade;
-import com.aca.homework.week18.website.facade.user.UserFacadeImpl;
-import com.aca.homework.week18.website.facade.user.UserSignUpRequestDto;
+import com.aca.homework.week18.website.facade.post.image.ImageMapper;
+import com.aca.homework.week18.website.facade.post.image.ImageMapperImpl;
+import com.aca.homework.week18.website.facade.user.*;
 import com.aca.homework.week18.website.repository.ImageRepository;
 import com.aca.homework.week18.website.repository.PostRepository;
 import com.aca.homework.week18.website.repository.UserRepository;
@@ -31,11 +31,21 @@ public class Main {
         PostRepository postRepository = context.getBean(PostRepository.class);
 
         UserService userService = new UserServiceImpl(userRepository);
-        ImageService imageService = new ImageServiceImpl(imageRepository);
-        PostService postService = new PostServiceImpl(postRepository, userService, imageService);
+        PostService postService = new PostServiceImpl(postRepository, userService);
+        ImageService imageService = new ImageServiceImpl(imageRepository, postService);
 
-        UserFacade userFacade = new UserFacadeImpl(userService);
-        PostFacade postFacade = new PostFacadeImpl(postService, userService, imageService);
+        UserMapper userMapper = new UserMapperImpl();
+        PostMapper postMapper = new PostMapperImpl(userMapper);
+        ImageMapper imageMapper = new ImageMapperImpl();
+
+        UserFacade userFacade = new UserFacadeImpl(userService, userMapper);
+        PostFacade postFacade = new PostFacadeImpl(
+                postService,
+                userService,
+                imageService,
+                imageMapper,
+                postMapper
+        );
 
 
         userFacade.signUp(
@@ -59,7 +69,7 @@ public class Main {
                         "username1",
                         "title",
                         "description",
-                        List.of(new Image("BB123BB"), new Image("AAA4456"))
+                        List.of("AAA123", "ASAS156", "asd7112s")
                 )
         );
 
@@ -68,12 +78,10 @@ public class Main {
                         "username1",
                         "title2",
                         "description3",
-                        List.of(new Image("BBa123BB"), new Image("AAA4456"))
+                        List.of("BBa123BB", "AAA4456")
                 )
         );
 
-        postFacade.getAllUserPosts(
-                new GetAllUserPostsRequestDto("username1")
-        );
+        postFacade.getAllUserPosts("username1");
     }
 }

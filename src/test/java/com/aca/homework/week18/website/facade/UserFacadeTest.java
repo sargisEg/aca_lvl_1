@@ -12,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
 import java.util.Optional;
 
 @ExtendWith(MockitoExtension.class)
@@ -22,18 +23,16 @@ class UserFacadeTest {
     @Mock
     private UserService userService;
 
+    private UserMapper userMapper;
+
     @BeforeEach
     public void init() {
-        testSubject = new UserFacadeImpl(userService);
+        userMapper = new UserMapperImpl();
+        testSubject = new UserFacadeImpl(userService, userMapper);
     }
 
     @Test
     public void testSignUpFirstTime() {
-
-        final UserSignUpResponseDto exceptedResponseDto = new UserSignUpResponseDto(
-                1L,
-                "username"
-        );
 
         final User returnUser = new User(
                 "username",
@@ -56,7 +55,7 @@ class UserFacadeTest {
                 userService.findByUsername("username")
         ).thenReturn(Optional.empty());
 
-        final UserSignUpResponseDto actualResponseDto = testSubject.signUp(
+        final UserDto actualResponseDto = testSubject.signUp(
                 new UserSignUpRequestDto(
                         "username",
                         "first name",
@@ -64,7 +63,22 @@ class UserFacadeTest {
                 )
         );
 
+        final UserDto exceptedResponseDto = new UserDto(
+                1L,
+                "username",
+                "first name",
+                "second name"
+        );
         Assertions.assertThat(actualResponseDto).isEqualTo(exceptedResponseDto);
+
+        Mockito.verify(userService).create(
+                new CreateUserParams(
+                        "username",
+                        "first name",
+                        "second name"
+                ));
+        Mockito.verify(userService).findByUsername("username");
+        Mockito.verifyNoMoreInteractions(userService);
     }
 
     @Test
@@ -85,6 +99,10 @@ class UserFacadeTest {
                 )
         ).thenReturn(returnUser);
 
+        Mockito.when(
+                userService.findByUsername("username")
+        ).thenReturn(Optional.empty());
+
         testSubject.signUp(
                 new UserSignUpRequestDto(
                         "username",
@@ -99,14 +117,25 @@ class UserFacadeTest {
                 Optional.of(returnUser)
         );
 
-        Assertions.assertThatThrownBy(() -> {
-            testSubject.signUp(
-                    new UserSignUpRequestDto(
-                            "username",
-                            "first name",
-                            "second name"
-                    )
-            );
-        }).isExactlyInstanceOf(UserAlreadyExistException.class);
+        final UserDto actualResponseDto = testSubject.signUp(
+                new UserSignUpRequestDto(
+                        "username",
+                        "first name",
+                        "second name"
+                )
+        );
+
+        final UserDto exceptedResponseDto = new UserDto(List.of("User with username username already exist."));
+
+        Assertions.assertThat(actualResponseDto).isEqualTo(exceptedResponseDto);
+
+        Mockito.verify(userService).create(
+                new CreateUserParams(
+                        "username",
+                        "first name",
+                        "second name"
+                ));
+        Mockito.verify(userService, Mockito.times(2)).findByUsername("username");
+        Mockito.verifyNoMoreInteractions(userService);
     }
 }

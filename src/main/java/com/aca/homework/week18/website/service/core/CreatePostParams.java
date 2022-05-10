@@ -10,20 +10,14 @@ public class CreatePostParams {
     private final String title;
     private final String description;
     private final Long userId;
-    private final List<Long> imagesId;
 
-    public CreatePostParams(String title, String description, Long userId, List<Long> imagesId) {
+    public CreatePostParams(String title, String description, Long userId) {
         Assert.hasText(title, "Post's title should not be null or empty");
         Assert.hasText(description, "Post's description should not be null or empty");
         Assert.notNull(userId, "Post's user id should not be null");
-        Assert.notNull(imagesId, "Post's images should not be null");
-        if (imagesId.size() > 5) {
-            throw new ImagesCountException(imagesId.size());
-        }
         this.title = title;
         this.description = description;
         this.userId = userId;
-        this.imagesId = imagesId;
     }
 
     @Override
@@ -31,12 +25,14 @@ public class CreatePostParams {
         if (this == o) return true;
         if (!(o instanceof CreatePostParams)) return false;
         CreatePostParams that = (CreatePostParams) o;
-        return Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(userId, that.userId) && Objects.equals(imagesId, that.imagesId);
+        return Objects.equals(title, that.title)
+                && Objects.equals(description, that.description)
+                && Objects.equals(userId, that.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, description, userId, imagesId);
+        return Objects.hash(title, description, userId);
     }
 
     @Override
@@ -45,7 +41,6 @@ public class CreatePostParams {
         sb.append("title='").append(title).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", userId=").append(userId);
-        sb.append(", images=").append(imagesId);
         sb.append('}');
         return sb.toString();
     }
@@ -62,7 +57,4 @@ public class CreatePostParams {
         return userId;
     }
 
-    public List<Long> getImages() {
-        return imagesId;
-    }
 }

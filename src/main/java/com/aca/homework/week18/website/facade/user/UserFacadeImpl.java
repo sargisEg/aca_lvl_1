@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
+import java.util.List;
 import java.util.Optional;
 
 public class UserFacadeImpl implements UserFacade {
@@ -14,13 +15,15 @@ public class UserFacadeImpl implements UserFacade {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserFacadeImpl.class);
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
-    public UserFacadeImpl(UserService userService) {
+    public UserFacadeImpl(UserService userService, UserMapper userMapper) {
+        this.userMapper = userMapper;
         this.userService = userService;
     }
 
     @Override
-    public UserSignUpResponseDto signUp(UserSignUpRequestDto dto) {
+    public UserDto signUp(UserSignUpRequestDto dto) {
         Assert.notNull(dto, "User signUp request dto should not be null");
         LOGGER.info("Signing up a user with a provided request - {}", dto);
 
@@ -29,7 +32,7 @@ public class UserFacadeImpl implements UserFacade {
         final Optional<User> optionalUser = userService.findByUsername(username);
 
         if (optionalUser.isPresent()) {
-            throw new UserAlreadyExistException(username);
+            return new UserDto(List.of("User with username " + username + " already exist."));
         }
 
         final User user = userService.create(
@@ -40,10 +43,7 @@ public class UserFacadeImpl implements UserFacade {
                 )
         );
 
-        final UserSignUpResponseDto responseDto = new UserSignUpResponseDto(
-                user.getId(),
-                user.getUsername()
-        );
+        final UserDto responseDto = userMapper.map(user);
 
         LOGGER.info(
                 "Successfully signed up a user with a provided request - {}, response - {}",

@@ -3,6 +3,7 @@ package com.aca.homework.week18.website.service.core;
 import com.aca.homework.week18.website.entity.Image;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,5 +13,5 @@ public interface ImageService {
 
     Optional<Image> findById(Long id);
 
-    Optional<Image> findByBlobId(String blobId);
+    List<Image> findByPostId(Long id);
 }

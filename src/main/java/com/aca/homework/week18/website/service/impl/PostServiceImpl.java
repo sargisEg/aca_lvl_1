@@ -1,6 +1,5 @@
 package com.aca.homework.week18.website.service.impl;
 
-import com.aca.homework.week18.website.entity.Image;
 import com.aca.homework.week18.website.entity.Post;
 import com.aca.homework.week18.website.entity.User;
 import com.aca.homework.week18.website.repository.PostRepository;
@@ -12,8 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
 
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class PostServiceImpl implements PostService {
 
@@ -22,12 +21,10 @@ public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
     private final UserService userService;
 
-    private final ImageService imageService;
 
-    public PostServiceImpl(PostRepository postRepository, UserService userService, ImageService imageService) {
+    public PostServiceImpl(PostRepository postRepository, UserService userService) {
         this.postRepository = postRepository;
         this.userService = userService;
-        this.imageService = imageService;
     }
 
     @Override
@@ -40,24 +37,10 @@ public class PostServiceImpl implements PostService {
                     throw new UserNotFoundException(params.getUserId());
                 });
 
-        List<Image> images = new LinkedList<>();
-
-        final List<Long> imagesId = params.getImages();
-
-        imagesId.forEach(imageId -> {
-            images.add(
-                    imageService.findById(imageId)
-                            .orElseThrow(() -> {
-                                throw new ImageNotFoundException(imageId);
-                            })
-            );
-        });
-
         final Post postFromParams = new Post(
                 params.getTitle(),
                 params.getDescription(),
-                user,
-                images
+                user
         );
 
         final Post post = postRepository.save(postFromParams);
@@ -75,5 +58,16 @@ public class PostServiceImpl implements PostService {
 
         LOGGER.info("Successfully got all user posts with username - {}, result - {}", username, posts);
         return posts;
+    }
+
+    @Override
+    public Optional<Post> findById(Long id) {
+        Assert.notNull(id, "Id should not be null");
+        LOGGER.info("Finding post with id - {}", id);
+
+        final Optional<Post> optionalPost = postRepository.findById(id);
+
+        LOGGER.info("Successfully found post with id - {}, result - {}", id, optionalPost);
+        return optionalPost;
     }
 }
