@@ -1,0 +1,23 @@
+A user can sign up on a website and create a post. The post has a title, description, and max 5 images.
+
+Create a UserFacde that has signUp method.
+Create a PostFacade that has create, uploadImage, getAllUserPosts methods.
+
+The getAllUserPosts method should return a dto object that contains user dto,
+list of post dtos where each of post dto contains list of image dto.
+
+Create User, Post, and Image entities. 
+
+The Image entity has id, and blobId fields only
+(the blob Id is the image id in external systems like google or amazon)
+
+
+In UserFacade validate and return an error if the user tries to sign-up second time.
+In PostFacade validate and do not allow to upload more than 5 images (return an error tried to upload 6th image)
+In PostFacade validate and return an error if the user to found.
+
+
+Create UserFacadeUnitTest class, mock dependencies and write the following unit tests:
+
+testSignUpFirstTime()
+testSignUpSecondTime() 
