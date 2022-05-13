@@ -1,0 +1,33 @@
+There is a platform that allows users to sign up and mark themself as open for job offers.
+The HR user can invite a user to an interview in one of the registered companies.
+If the user accepts that invitation he will receive an interview date and time.
+HR can not send an invitation if the user is not open to job offers.
+After an interview HR user can hire (also reject) that user to the company.
+
+Create a UserFacade that has methods with names:
+
+UserDetailsDto signUp(UserSignUpRequestDto dto)    
+UserDetailsDto getUserDetails(Long userId)
+UserDetailsDto openToWork(Long userId) // marks a user as open for job offers
+
+OrganizationFacade
+
+OrganizationDetailsDto register(OrganizationRegistrationRequestDto dto)
+OrganizationDetailsDto getOrganizationDetails(Long organizationId)
+
+The OrganizationDetailsDto should contain a list of employees (UserDetailsDto)
+
+InvitationFacade
+
+InvitationDetailsDto sendInvitation(InvitationRequestDto dto) // request should contain valid user id, organization id
+InvitationDetailsDto accepctInvitation(InvitationAcceptDto dto) // request should contain valid user id, invitation id
+InvitationDetailsDto rejectInvitation(InvitationRejectDto dto)
+
+the InvitationDetailsDto should have contained invitation status, user details, organization information
+
+JobFacade
+
+JobHireResponseDto hire(JobHireRequestDto dto) 
+
+
+
