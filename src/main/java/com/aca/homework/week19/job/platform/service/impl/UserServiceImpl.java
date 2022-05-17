@@ -2,9 +2,9 @@ package com.aca.homework.week19.job.platform.service.impl;
 
 import com.aca.homework.week19.job.platform.entity.User;
 import com.aca.homework.week19.job.platform.repository.UserRepository;
-import com.aca.homework.week19.job.platform.service.core.CreateUserParams;
-import com.aca.homework.week19.job.platform.service.core.UpdateUserParams;
-import com.aca.homework.week19.job.platform.service.core.UserService;
+import com.aca.homework.week19.job.platform.service.core.user.CreateUserParams;
+import com.aca.homework.week19.job.platform.service.core.user.UpdateUserParams;
+import com.aca.homework.week19.job.platform.service.core.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

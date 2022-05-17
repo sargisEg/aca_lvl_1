@@ -1,4 +1,4 @@
-package com.aca.homework.week19.job.platform.service.core;
+package com.aca.homework.week19.job.platform.service.core.user;
 
 import org.springframework.util.Assert;
 
@@ -14,11 +14,13 @@ public class CreateUserParams {
     public CreateUserParams(String username, String name, boolean isOpenForOffers) {
         Assert.hasText(
                 username,
-                "Class - CreateUserParams, method - CreateUserParams(String username, String name, boolean isOpenForOffers) username should not be null or empty"
+                "Class - CreateUserParams, method - CreateUserParams(String username, String name, boolean isOpenForOffers) " +
+                        "username should not be null or empty"
         );
         Assert.hasText(
                 name,
-                "Class - CreateUserParams, method - CreateUserParams(String username, String name, boolean isOpenForOffers) name should not be null or empty");
+                "Class - CreateUserParams, method - CreateUserParams(String username, String name, boolean isOpenForOffers) " +
+                        "name should not be null or empty");
         this.username = username;
         this.name = name;
         this.isOpenForOffers = isOpenForOffers;

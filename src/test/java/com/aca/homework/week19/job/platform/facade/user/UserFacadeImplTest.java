@@ -1,16 +1,14 @@
 package com.aca.homework.week19.job.platform.facade.user;
 
 import com.aca.homework.week19.job.platform.entity.User;
-import com.aca.homework.week19.job.platform.repository.UserRepository;
-import com.aca.homework.week19.job.platform.service.core.CreateUserParams;
-import com.aca.homework.week19.job.platform.service.core.UpdateUserParams;
-import com.aca.homework.week19.job.platform.service.core.UserService;
+import com.aca.homework.week19.job.platform.service.core.user.CreateUserParams;
+import com.aca.homework.week19.job.platform.service.core.user.UpdateUserParams;
+import com.aca.homework.week19.job.platform.service.core.user.UserService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;

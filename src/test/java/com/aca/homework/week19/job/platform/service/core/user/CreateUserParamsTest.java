@@ -1,5 +1,6 @@
-package com.aca.homework.week19.job.platform.service.core;
+package com.aca.homework.week19.job.platform.service.core.user;
 
+import com.aca.homework.week19.job.platform.service.core.user.CreateUserParams;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package com.aca.homework.week19.job.platform.service.core;
+package com.aca.homework.week19.job.platform.service.core.user;
 
 import com.aca.homework.week19.job.platform.entity.User;
 
