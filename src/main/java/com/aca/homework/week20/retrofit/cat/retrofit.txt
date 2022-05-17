@@ -1,0 +1,5 @@
+Integrate the retrofit in java project and write a service method that returns a fact dto from the following resource:
+
+https://catfact.ninja/fact
+
+
