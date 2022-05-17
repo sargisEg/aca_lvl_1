@@ -1,0 +1,111 @@
+aca=# create table companies (id serial primary key, company_name varchar(255) not null, company_price int not null, company_creation_date varchar(255) not null);
+CREATE TABLE
+aca=# create table users (id serial primary key, username varchar(255) not null, first_name varchar(255) not null, last_name varchar(255) not null, company_id int not null);
+CREATE TABLE
+aca=# select * from companies;
+ id | company_name | company_price | company_creation_date
+----+--------------+---------------+-----------------------
+(0 rows)
+
+aca=# select * from users;
+ id | username | first_name | last_name | company_id
+----+----------+------------+-----------+------------
+(0 rows)
+aca=# alter table users add constraint fk_users_companies_id foreign key (company_id) references companies (id);
+ALTER TABLE
+aca=# \d users
+                                   Table "public.users"
+   Column   |          Type          |                     Modifiers
+
+------------+------------------------+------------------------------------------
+----------
+ id         | integer                | not null default nextval('users_id_seq'::regclass)
+ username   | character varying(255) | not null
+ first_name | character varying(255) | not null
+ last_name  | character varying(255) | not null
+ company_id | integer                | not null
+
+Indexes:
+    "users_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "fk_users_companies_id" FOREIGN KEY (company_id) REFERENCES companies(id)
+
+aca=# select * from companies
+aca-# ;
+ id | company_name | company_price | company_creation_date
+----+--------------+---------------+-----------------------
+(0 rows)
+                                                     ^
+aca=# insert into companies (company_name, company_price, company_creation_date) values ('superAI', 20000, '12.12.12');
+INSERT 0 1
+aca=# insert into companies (company_name, company_price, company_creation_date) values ('marketAC', 123456, '05.07.20');
+INSERT 0 1
+aca=# insert into users (username, first_name, last_name, company_id) values ('uuser123', 'Jane', 'Smith', 1);
+INSERT 0 1
+aca=# insert into users (username, first_name, last_name, company_id) values ('jack789', 'Jack', 'Lee', 1);
+INSERT 0 1
+aca=# insert into users (username, first_name, last_name, company_id) values ('jjones', 'John', 'Jones', 1);
+INSERT 0 1
+aca=# insert into users (username, first_name, last_name, company_id) values ('kim_official', 'Kim', 'Kardashian', 2);
+INSERT 0 1
+aca=#  insert into users (username, first_name, last_name, company_id) values ('i0am0paul', 'Paul', 'Hart', 2);
+INSERT 0 1
+aca=# select * from companies;
+ id | company_name | company_price | company_creation_date
+----+--------------+---------------+-----------------------
+  1 | superAI      |         20000 | 12.12.12
+  2 | marketAC     |        123456 | 05.07.20
+(2 rows)
+
+aca=# select * from users;
+ id |   username   | first_name | last_name  | company_id
+----+--------------+------------+------------+------------
+  1 | uuser123     | Jane       | Smith      |          1
+  2 | jack789      | Jack       | Lee        |          1
+  3 | jjones       | John       | Jones      |          1
+  4 | kim_official | Kim        | Kardashian |          2
+  5 | i0am0paul    | Paul       | Hart       |          2
+(5 rows)
+
+aca=# select company_name from companies;
+ company_name
+--------------
+ superAI
+ marketAC
+(2 rows)
+
+aca=# select count(*) from companies;
+ count
+-------
+     2
+(1 row)
+
+aca=# select first_name from users;
+ first_name
+------------
+ Jane
+ Jack
+ John
+ Kim
+ Paul
+(5 rows)
+
+aca=# select c.company_name, u.first_name, u.last_name from companies c inner join users u on u.company_id = c.id;
+ company_name | first_name | last_name
+--------------+------------+------------
+ superAI      | John       | Jones
+ superAI      | Jack       | Lee
+ superAI      | Jane       | Smith
+ marketAC     | Paul       | Hart
+ marketAC     | Kim        | Kardashian
+(5 rows)
+                                                    ^
+aca=# select u.username, u.first_name, u.last_name from users u inner join companies c on c.id = u.company_id where c.company_name = 'superAI';
+ username | first_name | last_name
+----------+------------+-----------
+ uuser123 | Jane       | Smith
+ jack789  | Jack       | Lee
+ jjones   | John       | Jones
+(3 rows)
+
+aca=#
