@@ -1,0 +1,11 @@
+Create an OptionalMain class that has 
+
+void printFirstSymbol(Optional<String> string) method that prints the second symbol of the string if it exists.
+
+Create OptionalMainTest class and write the following methods:
+
+testWhenOptionalIsEmpty()
+testWhenStringIsEmpty()   //the string is ""; nothing should be printed
+testWhenStringHas1Symbol() //the string is "c"; nothing should be printed
+testWhenStringHas2Symbols() //the string is "ab"; b should be printed
+
