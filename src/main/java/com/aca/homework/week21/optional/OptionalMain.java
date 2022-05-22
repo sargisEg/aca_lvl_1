@@ -1,13 +1,25 @@
 package com.aca.homework.week21.optional;
 
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 public class OptionalMain {
 
+    private final Consumer<Character> consumer;
+
+    public OptionalMain(Consumer<Character> consumer) {
+        this.consumer = consumer;
+    }
+
     void printFirstSymbol(Optional<String> string) {
 
-        System.out.println(string.map(s -> {
-            return s.length() < 2 ? "" : s.charAt(1);
-        }).orElse(""));
+        string.ifPresent(s -> {
+            if (s.length() >= 2) {
+                consumer.accept(s.charAt(1));
+            }
+        });
+
     }
+
 }
