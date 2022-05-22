@@ -1,0 +1,5 @@
+Create a ButtonState interface that has isEnabled(), ColorType color(), and ButtonState nextState() methods.
+
+Create 2 implementations: ButtonOffState and ButtonOnState.
+
+Write unit tests.
