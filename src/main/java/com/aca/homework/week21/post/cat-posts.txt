@@ -1,0 +1,25 @@
+
+Create a Retrofit service bean that can fetch a fact from the below endpoint.
+Also, a wrapper service that has String getRandomFact() method.
+
+https://catfact.ninja/fact
+
+Create a resource that enables users to create a Post with random cat fact content.
+
+The POST table should have an id, creation date and time (LocalDateTime),
+ content (the content is fetched from catfact resource using retrofit service),
+ created by (should be passed by post creator user).
+
+The posts resource exposes 'get all posts', 'get post by id', 'delete a post by id' endpoints.
+
+
+the post resource (PostController) mappings should be
+
+POST /posts
+GET /posts
+GET /posts/{id}
+DELETE /posts/{id}
+
+Create unit tests for service and facade layers, and service parameter objects.
+Use mocked dependencies if needed, verify mocked behavior invocations,
+ and verify that there are no more invocations on mocked dependencies.
