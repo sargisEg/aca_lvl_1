@@ -7,5 +7,5 @@ import java.util.Map;
 
 public interface CatFactService {
     @GET("fact")
-    Call<Map<String, String>> getFact();
+    Call<CatFactDto> getFact();
 }

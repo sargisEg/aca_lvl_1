@@ -1,12 +1,11 @@
 package com.aca.homework.week20.retrofit.cat;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
-import java.util.Map;
+import java.io.IOException;
 
 public class Main {
 
@@ -18,19 +17,14 @@ public class Main {
 
         CatFactService catFactService = retrofit.create(CatFactService.class);
 
-        Call<Map<String, String>> fact = catFactService.getFact();
+        Call<CatFactDto> fact = catFactService.getFact();
 
-        fact.enqueue(new Callback<Map<String, String>>() {
-            @Override
-            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
-                System.out.println(response.body());
-            }
-
-            @Override
-            public void onFailure(Call<Map<String, String>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
-
+        final Response<CatFactDto> catFactDtoResponse;
+        try {
+            catFactDtoResponse = fact.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(catFactDtoResponse.body().getFact());
     }
 }
