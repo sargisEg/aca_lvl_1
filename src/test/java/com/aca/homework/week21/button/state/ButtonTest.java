@@ -9,7 +9,7 @@ class ButtonTest {
 
     @Test
     public void testSwitch1Time() {
-        button = Button.of(new ButtonOffState());
+        button = Button.of(ButtonOffState.getState());
         button.switchState();
         Assertions.assertThat(button.getButtonState().color())
                 .isEqualTo(ColorType.GREEN);
@@ -19,7 +19,7 @@ class ButtonTest {
 
     @Test
     public void testSwitch2Time() {
-        button = Button.of(new ButtonOffState());
+        button = Button.of(ButtonOffState.getState());
         button.switchState();
         button.switchState();
         Assertions.assertThat(button.getButtonState().color())
