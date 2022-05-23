@@ -1,0 +1,14 @@
+Create a bulk post creation resource that allows users to create more than 1 cat post in one endpoint invocation.
+
+the mapping should be:
+
+POST /posts/bulk
+
+Users should POST a DTO that contains createdBy and count fields only.
+
+Use concurrency to increase bulk post creation performance.
+
+The response DTO should contain a list of post DTOs.
+
+When the post is created via bulk API, the post content should start with the "prefix" described in the application.properties.
+
