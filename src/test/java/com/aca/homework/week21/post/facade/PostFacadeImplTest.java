@@ -41,7 +41,8 @@ class PostFacadeImplTest {
                 postService,
                 randomFactService,
                 postMapper,
-                localDateTimeService);
+                localDateTimeService,
+                "prefix_");
     }
 
     @Test
@@ -154,5 +155,51 @@ class PostFacadeImplTest {
         verify(postService).findAll();
         verify(postMapper).map(new Post());
         verifyNoMoreInteractions(postService, postMapper, randomFactService);
+    }
+
+    @Test
+    public void testCreatePosts() {
+        final Post post = new Post(
+                LocalDateTime.of(1111, 11, 11, 11, 11),
+                "prefix_context",
+                "name"
+        );
+        post.setId(1L);
+        when(postService.create(new CreatePostParams(
+                LocalDateTime.of(1111, 11, 11, 11, 11),
+                "prefix_context",
+                "name"
+        ))).thenReturn(post);
+
+        when(randomFactService.getRandomFact())
+                .thenReturn("context");
+        when(localDateTimeService.getNow())
+                .thenReturn(LocalDateTime.of(1111, 11, 11, 11, 11));
+
+        final PostDto postDto = new PostDto(
+                1L,
+                LocalDateTime.of(1111, 11, 11, 11, 11),
+                "prefix_context",
+                "name"
+        );
+        when(postMapper.map(post))
+                .thenReturn(postDto);
+
+        Assertions.assertThat(testSubject.createPosts(
+                new CreatePostsRequestDto(
+                        "name",
+                        1L
+                )
+        )).isEqualTo(List.of(postDto));
+
+        verify(postService).create(new CreatePostParams(
+                LocalDateTime.of(1111, 11, 11, 11, 11),
+                "prefix_context",
+                "name"
+        ));
+        verify(randomFactService).getRandomFact();
+        verify(postMapper).map(post);
+        verifyNoMoreInteractions(postService, randomFactService, postMapper);
+
     }
 }

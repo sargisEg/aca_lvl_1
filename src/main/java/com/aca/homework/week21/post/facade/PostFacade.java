@@ -6,6 +6,8 @@ public interface PostFacade {
 
     PostDto createPost(CreatePostRequestDto dto);
 
+    List<PostDto> createPosts(CreatePostsRequestDto dto);
+
     PostDto getPostById(Long id);
 
     void deletePostById(Long id);

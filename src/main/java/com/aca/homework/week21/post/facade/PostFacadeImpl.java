@@ -7,6 +7,7 @@ import com.aca.homework.week21.post.service.core.PostService;
 import com.aca.homework.week21.post.service.core.RandomFactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -14,6 +15,10 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Component
 public class PostFacadeImpl implements PostFacade {
@@ -25,11 +30,18 @@ public class PostFacadeImpl implements PostFacade {
     private final PostMapper postMapper;
     private final LocalDateTimeService localDateTimeService;
 
-    public PostFacadeImpl(PostService postService, RandomFactService randomFactService, PostMapper postMapper, LocalDateTimeService localDateTimeService) {
+    private final String bulkPostPrefix;
+
+    public PostFacadeImpl(PostService postService,
+                          RandomFactService randomFactService,
+                          PostMapper postMapper,
+                          LocalDateTimeService localDateTimeService,
+                          @Value("${bulk.post.content.prefix}") String bulkPostPrefix) {
         this.postService = postService;
         this.randomFactService = randomFactService;
         this.postMapper = postMapper;
         this.localDateTimeService = localDateTimeService;
+        this.bulkPostPrefix = bulkPostPrefix;
     }
 
     @Override
@@ -88,6 +100,46 @@ public class PostFacadeImpl implements PostFacade {
         posts.forEach(post -> postDtos.add(postMapper.map(post)));
 
         LOGGER.info("Successfully got a post for provided request, response - {}", postDtos);
+        return postDtos;
+    }
+
+    @Override
+    public List<PostDto> createPosts(CreatePostsRequestDto dto) {
+        Assert.notNull(dto, "Posts creation request dto should not be null");
+        LOGGER.info("Creating posts for provided request - {}", dto);
+
+        final long count = dto.getPostCount();
+
+        final ExecutorService executorService = Executors.newCachedThreadPool();
+        final List<Future<PostDto>> futureList = new LinkedList<>();
+
+        for (int i = 0; i < count; i++) {
+            final Future<PostDto> dtoFuture = executorService.submit(() -> {
+                final Post post = postService.create(new CreatePostParams(
+                        localDateTimeService.getNow(),
+                        bulkPostPrefix + randomFactService.getRandomFact(),
+                        dto.getName()
+                ));
+
+                final PostDto postDto = postMapper.map(post);
+                return postDto;
+            });
+            futureList.add(dtoFuture);
+        }
+
+        final List<PostDto> postDtos = new LinkedList<>();
+
+        futureList.forEach(postDtoFuture -> {
+            try {
+                postDtos.add(postDtoFuture.get());
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        executorService.shutdown();
+
+        LOGGER.info("Successfully created posts for provided request - {}, response - {}", dto, postDtos);
         return postDtos;
     }
 }

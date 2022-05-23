@@ -1,6 +1,7 @@
 package com.aca.homework.week21.post;
 
 import com.aca.homework.week21.post.facade.CreatePostRequestDto;
+import com.aca.homework.week21.post.facade.CreatePostsRequestDto;
 import com.aca.homework.week21.post.facade.PostDto;
 import com.aca.homework.week21.post.facade.PostFacade;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,11 @@ public class PostController {
     @PostMapping
     public PostDto createPost(@RequestBody CreatePostRequestDto dto) {
         return postFacade.createPost(dto);
+    }
+
+    @RequestMapping(value = "/bulk", method = RequestMethod.POST)
+    public List<PostDto> createPosts(@RequestBody CreatePostsRequestDto dto) {
+        return postFacade.createPosts(dto);
     }
 
     @GetMapping
